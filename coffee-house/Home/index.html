@@ -1,37 +1,39 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Home</title>
+    <link rel="icon" href="../images/logo.png">
     <script src="./index.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <header class="header">
         <div class="header__container">
-          <div class="header__logo">
+          <a href="#homepage" class="header__logo">
             <img src="../images/logo.png" alt="header logo" />
-          </div>
+          </a>
           <nav class="header__menu">
             <ul class="header__menu-items">
               <li class="header__menu-item">
-                <a href="">Favorite coffee</a>
+                <a href="#favourite">Favorite coffee</a>
               </li>
               <li class="header__menu-item">
-                <a href="">About</a>
+                <a href="#about">About</a>
               </li>
               <li class="header__menu-item">
-                <a href="">Mobile app</a>
+                <a href="#mobile-app">Mobile app</a>
               </li>
               <li class="header__menu-item">
-                <a href="">Contact us</a>
+                <a href="#contacts">Contact us</a>
               </li>
             </ul>
           </nav>
           <div class="header__menupath menupath">
-            <a href="" class="menupath__link">Menu</a>
+            <a href="../Menu/index.html" class="menupath__link">Menu</a>
             <img
               src="../images/icons/coffee-cup.svg"
               alt="coffee cup"
@@ -40,7 +42,7 @@
           </div>
         </div>
       </header>
-      <main class="mainpage">
+      <main id="homepage" class="mainpage">
         <section class="homepage homepage__container">
           <div class="homepage__banner">
             <h1 class="homepage__title">
@@ -53,12 +55,12 @@
               and those seeking a warm and inviting space to enjoy their
               favorite beverage.
             </p>
-            <button class="homepage__button">
+            <a href="../Menu/index.html" class="homepage__button">
               <span>Menu</span>
-            </button>
+            </a>
           </div>
         </section>
-        <section class="favourite favourite__container">
+        <section id="favourite" class="favourite favourite__container">
           <h2 class="favourite__title">
             Choose your
             <i>favourite</i>
@@ -159,7 +161,7 @@
             <span class="dot" onclick="currentSlide(3)"></span>
           </div>
         </section>
-        <section class="gallery gallery__container">
+        <section id="about" class="gallery gallery__container">
           <h2 class="gallery__title">
             Resource is
             <i> the perfect and cozy place</i>
@@ -197,7 +199,7 @@
             </div>
           </div>
         </section>
-        <section class="download download__container">
+        <section id="mobile-app" class="download download__container">
           <div class="download__info">
             <h2 class="download__info-title">
               <i>Download</i>
@@ -295,7 +297,7 @@
           </div>
         </section>
       </main>
-      <footer class="footer footer__container">
+      <footer id="contacts" class="footer footer__container">
         <div class="footer__left">
           <h2 class="footer__left-subtitle">
             Sip, Savor, Smile.
@@ -389,18 +391,18 @@
         <div class="footer__right">
           <h3 class="footer__right-subtitle">Contact Us</h3>
           <div class="footer__right-contacts contacts">
-            <div class="contacts__info address">
+            <a href="https://maps.app.goo.gl/cKKgUaCrrADpdGM17" class="contacts__info address">
               <span class="contacts__icon">
                 <img src="../images/icons/pin-alt.svg" alt="pin-alt" />
               </span>
               <p class="contacts__text">8558 Green Rd, LA</p>
-            </div>
-            <div class="contacts__info phone">
+            </a>
+            <a href="tel:+4733378901" class="contacts__info phone">
               <span class="contacts__icon">
                 <img src="../images/icons/phone.svg" alt="phone" />
               </span>
               <p class="contacts__text">+1 (603) 555-0123</p>
-            </div>
+            </a>
             <div class="contacts__info">
               <span class="contacts__icon">
                 <img src="../images/icons/clock.svg" alt="clock" />
@@ -413,3 +415,7 @@
     </div>
   </body>
 </html>
+
+
+
+

@@ -234,9 +234,7 @@ body {
   cursor: pointer;
   position: absolute;
   top: 50%;
-  width: auto;
   margin-top: -22px;
-  transition: 0.6s ease;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -307,7 +305,7 @@ body {
   cursor: pointer;
 }
 .gallery__image:hover img {
-  transform: scale(1.01, 1.01);
+  transform: scale(1);
 }
 .gallery__image img {
   width: 100%;
@@ -315,7 +313,8 @@ body {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 20px;
-  transition: 0.5s all ease-in-out;
+  transition: transform 1s, filter 2s ease-in-out;
+  transform: scale(1.2);
 }
 
 .download {
