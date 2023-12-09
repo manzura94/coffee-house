@@ -44,6 +44,14 @@ body {
   margin: 0 auto;
 }
 
+.header__menupath {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-bottom: 2px solid #403f3d;
+}
+
 .menu {
   margin: 20px 0 100px;
 }
@@ -88,8 +96,13 @@ body {
   font-weight: 600;
   line-height: 150%;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 .menu__buttons .active {
+  background: #665f55;
+  color: #e1d4c9;
+}
+.menu__buttons .unactive:hover {
   background: #665f55;
   color: #e1d4c9;
 }

@@ -1,3 +1,11 @@
+.header__menupath{
+  display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border-bottom: 2px solid #403f3d;
+}
+
 .menu {
   margin: 20px 0 100px;
 
@@ -22,6 +30,9 @@
     justify-content: center;
     gap: 16px;
 
+
+
+
     &-icon {
       display: flex;
       padding: 7px 8px;
@@ -45,11 +56,21 @@
       font-weight: 600;
       line-height: 150%;
       cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
     }
 
     .active {
       background: $background-container;
       color: $text-light;
+    }
+
+    .unactive{
+      
+      &:hover{
+        background: $background-container;
+        color: $text-light;
+      }
     }
   }
 
