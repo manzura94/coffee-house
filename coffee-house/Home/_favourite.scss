@@ -1,0 +1,112 @@
+.favourite {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+
+
+
+  &__title {
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%;
+    color: $text-dark;
+    align-self: center;
+
+    i {
+      color: $text-accent;
+    }
+  }
+
+  &__slideshow {
+    max-width: 1440px;
+    width: 100%;
+    position: relative;
+    margin: 40px auto;
+  }
+
+
+
+  .fade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    &__title {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 125%;
+      color: $text-dark;
+    }
+
+    &__desc {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%;
+      color: $text-dark;
+      width: 33%;
+      text-align: center;
+    }
+
+    &__price {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 125%;
+      color: $text-dark;
+    }
+  }
+
+
+
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    user-select: none;
+
+
+    &:hover {
+
+      svg {
+        fill: $background-container;
+
+      }
+
+      svg path {
+        stroke: $text-light;
+      }
+    }
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .slider-dots{
+    display: flex;
+    justify-content: center;
+  }
+
+  .dot{
+    cursor: pointer;
+    height: 4px;
+    width: 40px;
+    margin: 0 2px;
+    background-color: $border-light;
+    border-radius: 100px;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active, .dot:hover {
+    background-color: $border-dark;
+  }
+  
+}

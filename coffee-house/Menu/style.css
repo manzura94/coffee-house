@@ -1,0 +1,149 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+html,
+body {
+  height: 100%;
+  line-height: 1;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter";
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100%;
+  padding: 20px 0px 40px 0px;
+  background: #e1d4c9;
+  align-items: center;
+}
+
+[class*=__container] {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header__menupath {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-bottom: 2px solid #403f3d;
+}
+
+.menu {
+  margin: 20px 0 100px;
+}
+.menu__title {
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%;
+  color: #403f3d;
+  text-align: center;
+  width: 60%;
+  margin: auto;
+}
+.menu__title i {
+  color: #b0907a;
+}
+.menu__buttons {
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.menu__buttons-icon {
+  display: flex;
+  padding: 7px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #c1b6ad;
+}
+.menu__buttons a {
+  display: flex;
+  padding: 8px 16px 8px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  border: 1px solid #c1b6ad;
+  color: #403f3d;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.menu__buttons .active {
+  background: #665f55;
+  color: #e1d4c9;
+}
+.menu__buttons .unactive:hover {
+  background: #665f55;
+  color: #e1d4c9;
+}
+.menu__wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+.menu__wrapper-item {
+  border: 1px solid #c1b6ad;
+  border-radius: 40px;
+  cursor: pointer;
+}
+.menu__wrapper-item:hover .menu__wrapper-image img {
+  transform: scale(1);
+}
+.menu__wrapper-image {
+  width: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+}
+.menu__wrapper-image img {
+  width: 100%;
+  transition: transform 1s, filter 2s ease-in-out;
+  transform: scale(1.2);
+}
+.menu__wrapper-info {
+  padding: 20px;
+}
+.menu__wrapper-subtitle, .menu__wrapper-price {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%;
+  color: #403f3d;
+}
+.menu__wrapper-text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: #403f3d;
+  margin: 12px 0;
+}/*# sourceMappingURL=style.css.map */

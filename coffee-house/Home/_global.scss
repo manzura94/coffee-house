@@ -1,0 +1,28 @@
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100%;
+    padding: 20px 0px 40px 0px;
+    background: $background-body;
+    align-items: center;
+  }
+  
+  [class*="__container"] {
+    max-width: 1440px;
+    margin: 0 auto;
+
+    // @media (max-width: 1230px) {
+    //   & {
+    //     max-width: 1000px;
+    //   }
+    // }
+    // @media (max-width: 1030px) {
+    //   max-width: 900px;
+    // }
+    // @media (max-width: 900px) {
+    //   max-width: 750px;
+    // }
+  }
