@@ -14,7 +14,7 @@
       gap: 40px;
       border-radius: 40px;
       padding: 100px;
-      background-image: url('../images/homepage-banner.jpg');
+      background-image: url('./images/homepage-banner.jpg');
     }
   
     &__title {
@@ -51,7 +51,7 @@
       position: relative;
   
       &::after {
-        content: url("../images/icons/coffee-cup.svg");
+        content: url("./images/icons/coffee-cup.svg");
         position: absolute;
         left: 40px;
         top: 21px;
