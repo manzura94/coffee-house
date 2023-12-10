@@ -51,7 +51,7 @@
       position: relative;
   
       &::after {
-        content: url(../images/icons/coffee-cup.svg);
+        content: url("../images/icons/coffee-cup.svg");
         position: absolute;
         left: 40px;
         top: 21px;
