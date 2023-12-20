@@ -5,9 +5,13 @@
     flex-direction: column;
     overflow: hidden;
     min-height: 100%;
-    padding: 20px 0px 40px 0px;
+    padding-top: 20px;
+    padding-bottom: 40px;
     background: $background-body;
     align-items: center;
+    @include adaptive-value('padding-left', 40, 16, 1);
+    @include adaptive-value('padding-right', 40, 16, 1)
+
   }
   
   [class*="__container"] {

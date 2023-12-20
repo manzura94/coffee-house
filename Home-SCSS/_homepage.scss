@@ -7,22 +7,40 @@
   }
   
   .homepage {
+    display: flex;
+    border-radius: 40px;
+    background-image: url('./images/homepage-banner.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    @include adaptive-value("padding-left", 100, 60, 16);
+    @include adaptive-value("padding-right", 100, 60, 16);
+    @include adaptive-value("padding-top", 100, 100, 60);
+    @include adaptive-value("padding-bottom", 100, 100, 60);
+
+
+
+
     &__banner {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 40px;
-      border-radius: 40px;
-      padding: 100px;
-      background-image: url('./images/homepage-banner.jpg');
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    gap: 40px;
+
+    @include media(768){
+      width: 100%;
+    }
+
     }
   
     &__title {
-      font-size: 72px;
       font-weight: 600;
       line-height: 105%;
       color: $text-light;
-      width: 50%;
+
+      @include adaptive-value('font-size', 72, 42, 1);
   
       i {
         color: $text-accent;
@@ -35,7 +53,6 @@
       font-weight: 400;
       line-height: 150%;
       color: $text-light;
-      width: 45%;
     }
   
     &__button {
@@ -60,6 +77,11 @@
         background-color: #403f3d;
         height: 0;
         transition: transform 0.55s ease-in-out;
+
+        @include media(900){
+          left: 130px;
+          transform: none;
+        }
       }
   
       &:hover:after {
