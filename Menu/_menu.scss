@@ -10,18 +10,8 @@
   margin: 20px 0 100px;
 
   &__title {
-    font-size: 60px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 125%;
-    color: $text-dark;
     text-align: center;
-    width: 60%;
     margin: auto;
-
-    i {
-      color: $text-accent;
-    }
   }
 
   &__buttons {
@@ -29,6 +19,10 @@
     display: flex;
     justify-content: center;
     gap: 16px;
+
+    @include media (565){
+      gap: 8px;
+    }
 
 
 
@@ -75,14 +69,35 @@
   }
 
   &__wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
     gap: 40px;
+    justify-content: space-between;
+
+    
 
     &-item {
       border: 1px solid $border-light;
       border-radius: 40px;
       cursor: pointer;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+    flex: 1 1 auto;
+
+    @include media(1100){
+      width: 25%;
+    }
+
+    @include media(885){
+      width: 33%;
+    }
+
+    @include media(565){
+      width: 100%;
+    }
+      
 
       &:hover{
         .menu__wrapper-image img{
@@ -99,9 +114,17 @@
       overflow: hidden;
 
       img {
+        max-width: 100%;
         width: 100%;
+        height: 100%;
+        object-fit: contain;
+        vertical-align: top;
         transition: transform 1s, filter 2s ease-in-out;
       transform: scale(1.2);
+
+      @include media (650){
+        transform: scale(1);
+      }
 
       }
 
