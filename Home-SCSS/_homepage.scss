@@ -14,10 +14,10 @@
     background-size: cover;
     background-repeat: no-repeat;
 
-    @include adaptive-value("padding-left", 100, 60, 16);
-    @include adaptive-value("padding-right", 100, 60, 16);
-    @include adaptive-value("padding-top", 100, 100, 60);
-    @include adaptive-value("padding-bottom", 100, 100, 60);
+    @include adaptive-value("padding-left", 100, 16, 1);
+    @include adaptive-value("padding-right", 100, 16, 1);
+    @include adaptive-value("padding-top", 100, 60, 1);
+    @include adaptive-value("padding-bottom", 100, 60, 1);
 
 
 
@@ -29,7 +29,15 @@
     width: 50%;
     gap: 40px;
 
-    @include media(768){
+    @include media(1280){
+      width: 60%;
+    }
+
+    @include media(1065){
+      width: 70%;
+    }
+
+    @include media(914){
       width: 100%;
     }
 
@@ -39,8 +47,11 @@
       font-weight: 600;
       line-height: 105%;
       color: $text-light;
+     font-size: 72px;
 
-      @include adaptive-value('font-size', 72, 42, 1);
+     @include media(645){
+      font-size: 42px;
+    }
   
       i {
         color: $text-accent;
