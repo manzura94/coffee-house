@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <title>Home</title>
-    <link rel="icon" href="./images/logo.png">
-    <script src="./index.js"></script>
+    <link rel="icon" href="./images/logo.png" />
   </head>
   <body>
     <div class="wrapper">
@@ -31,6 +30,14 @@
                 <a href="#contacts">Contact us</a>
               </li>
             </ul>
+            <div class="burger__menu ">
+              <a href="./Menu/index.html" class="menupath__link">Menu</a>
+              <img
+                src="./images/icons/coffee-cup.svg"
+                alt="coffee cup"
+                class="menupath__icon"
+              />
+            </div>
           </nav>
           <div class="header__menupath menupath">
             <a href="./Menu/index.html" class="menupath__link">Menu</a>
@@ -40,6 +47,9 @@
               class="menupath__icon"
             />
           </div>
+          <button  class="header__burger-button">
+             <span class="line"></span>
+          </button>
         </div>
       </header>
       <main id="homepage" class="mainpage">
@@ -47,7 +57,8 @@
           <div class="homepage__banner">
             <h1 class="homepage__title">
               <i> Enjoy</i>
-              premium coffee at our charming cafe
+              premium <br />
+              coffee at our charming cafe
             </h1>
             <p class="homepage__desc">
               With its inviting atmosphere and delicious coffee options, the
@@ -69,10 +80,7 @@
           <div class="favourite__slideshow">
             <div class="favourite__slides fade">
               <div class="fade__image">
-                <img
-                  src="./images/coffee-slider-1.png"
-                  alt="coffee-slider-1"
-                />
+                <img src="./images/coffee-slider-1.png" alt="coffee-slider-1" />
               </div>
               <h3 class="fade__title">S’mores Frappuccino</h3>
               <p class="fade__desc">
@@ -81,7 +89,7 @@
               </p>
               <div class="fade__price">$5.50</div>
             </div>
-            <!-- <div class="favourite__slides fade">
+            <div class="favourite__slides fade">
               <div class="fade__image">
                 <img src="../images/coffee-slider-2.png" alt="coffee-slider" />
               </div>
@@ -91,8 +99,8 @@
                 syrup, with cream under whipped thick foam.
               </p>
               <div class="fade__price">$5.00</div>
-            </div> -->
-            <!-- <div class="favourite__slides fade">
+            </div>
+            <div class="favourite__slides fade">
               <div class="fade__image">
                 <img src="../images/coffee-slider-3.png" alt="coffee-slider" />
               </div>
@@ -102,8 +110,8 @@
                 coffee, milk and ice.
               </p>
               <div class="fade__price">$4.50</div>
-            </div> -->
-            <a class="prev" onclick="plusSlides(-1)">
+            </div>
+            <a class="btn prev" onclick="plusSlides(-1)">
               <svg
                 width="60"
                 height="60"
@@ -127,7 +135,7 @@
                 />
               </svg>
             </a>
-            <a class="next" onclick="plusSlides(1)">
+            <a class="btn next"  onclick="plusSlides(1)">
               <svg
                 width="60"
                 height="60"
@@ -152,7 +160,6 @@
               </svg>
             </a>
           </div>
-          <br />
 
           <!-- The dots/circles -->
           <div class="slider-dots">
@@ -201,7 +208,7 @@
         </section>
         <section id="mobile-app" class="download download__container">
           <div class="download__info">
-            <h2 class="download__info-title">
+            <h2 class="download__info__title">
               <i>Download</i>
               our apps to start ordering
             </h2>
@@ -299,7 +306,7 @@
       </main>
       <footer id="contacts" class="footer footer__container">
         <div class="footer__left">
-          <h2 class="footer__left-subtitle">
+          <h2 class="footer__left__title">
             Sip, Savor, Smile.
             <i>It’s coffee time!</i>
           </h2>
@@ -391,7 +398,10 @@
         <div class="footer__right">
           <h3 class="footer__right-subtitle">Contact Us</h3>
           <div class="footer__right-contacts contacts">
-            <a href="https://maps.app.goo.gl/cKKgUaCrrADpdGM17" class="contacts__info address">
+            <a
+              href="https://maps.app.goo.gl/cKKgUaCrrADpdGM17"
+              class="contacts__info address"
+            >
               <span class="contacts__icon">
                 <img src="./images/icons/pin-alt.svg" alt="pin-alt" />
               </span>
@@ -414,8 +424,6 @@
       </footer>
     </div>
   </body>
+  <script src="./index.js"></script>
+
 </html>
-
-
-
-

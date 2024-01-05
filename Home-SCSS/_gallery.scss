@@ -2,16 +2,7 @@
 
 .gallery {
     &__title {
-      font-size: 60px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 125%;
-      color: $text-dark;
       margin-bottom: 40px;
-  
-      i {
-        color: $text-accent;
-      }
     }
   
     &__collection {
@@ -23,20 +14,50 @@
         "first fourth"
         "third fourth";
       gap: 40px;
+
+      @include media (768){
+    grid-template-columns: 1fr;
+    grid-template-rows: 590px 590px;
+    grid-template-areas: unset;
+    gap: 40px;
+    
+
+      }
   
       .image-1 {
         grid-area: first;
+
+        @include media (768){
+          order: 1;
+          grid-area: unset;
+        }
       }
   
       .image-2 {
         grid-area: third;
+
+        @include media (768){
+          display: none;
+        }
+
       }
   
       .image-3 {
         grid-area: second;
+
+        @include media (768){
+          display: none;
+        }
+
       }
+
       .image-4 {
         grid-area: fourth;
+
+        @include media (768){
+          order: 2;
+          grid-area: unset;
+        }
       }
     }
   
@@ -59,6 +80,10 @@
         transition: transform 1s, filter 2s ease-in-out;
 
         transform: scale(1.2);
+
+        @include media (650){
+          transform: scale(1);
+        }
       }
     }
   }
