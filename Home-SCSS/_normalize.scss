@@ -28,3 +28,8 @@
   body {
     font-family: "Inter";
   }
+
+  .no-scroll{
+    overflow: hidden;
+    height: 100vh;
+  }

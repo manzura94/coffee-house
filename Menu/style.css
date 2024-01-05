@@ -29,6 +29,11 @@ body {
   font-family: "Inter";
 }
 
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -37,6 +42,7 @@ body {
   padding: 20px 40px 40px;
   background: #e1d4c9;
   align-items: center;
+  position: relative;
 }
 @media only screen and (max-width: 685px) {
   .wrapper {

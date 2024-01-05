@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./style.css" />
     <title>Home</title>
     <link rel="icon" href="./images/logo.png" />
-    <script src="./index.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -31,6 +30,14 @@
                 <a href="#contacts">Contact us</a>
               </li>
             </ul>
+            <div class="burger__menu ">
+              <a href="./Menu/index.html" class="menupath__link">Menu</a>
+              <img
+                src="./images/icons/coffee-cup.svg"
+                alt="coffee cup"
+                class="menupath__icon"
+              />
+            </div>
           </nav>
           <div class="header__menupath menupath">
             <a href="./Menu/index.html" class="menupath__link">Menu</a>
@@ -40,11 +47,9 @@
               class="menupath__icon"
             />
           </div>
-          <div class="header__burger-button">
-            <a href="./Menu/index.html">
-              <img src="./images/icons/button-icon-burger.svg" alt="" />
-            </a>
-          </div>
+          <button  class="header__burger-button">
+             <span class="line"></span>
+          </button>
         </div>
       </header>
       <main id="homepage" class="mainpage">
@@ -84,7 +89,7 @@
               </p>
               <div class="fade__price">$5.50</div>
             </div>
-            <!-- <div class="favourite__slides fade">
+            <div class="favourite__slides fade">
               <div class="fade__image">
                 <img src="../images/coffee-slider-2.png" alt="coffee-slider" />
               </div>
@@ -94,8 +99,8 @@
                 syrup, with cream under whipped thick foam.
               </p>
               <div class="fade__price">$5.00</div>
-            </div> -->
-            <!-- <div class="favourite__slides fade">
+            </div>
+            <div class="favourite__slides fade">
               <div class="fade__image">
                 <img src="../images/coffee-slider-3.png" alt="coffee-slider" />
               </div>
@@ -105,8 +110,8 @@
                 coffee, milk and ice.
               </p>
               <div class="fade__price">$4.50</div>
-            </div> -->
-            <a class="prev" onclick="plusSlides(-1)">
+            </div>
+            <a class="btn prev" onclick="plusSlides(-1)">
               <svg
                 width="60"
                 height="60"
@@ -130,7 +135,7 @@
                 />
               </svg>
             </a>
-            <a class="next" onclick="plusSlides(1)">
+            <a class="btn next"  onclick="plusSlides(1)">
               <svg
                 width="60"
                 height="60"
@@ -419,4 +424,6 @@
       </footer>
     </div>
   </body>
+  <script src="./index.js"></script>
+
 </html>
