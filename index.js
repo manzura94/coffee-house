@@ -1,5 +1,4 @@
 
-
 const burgerButton = document.querySelector(".header__burger-button");
 const lineButton = document.querySelector(".line");
 const burgerMenu = document.querySelector(".header__menu");
