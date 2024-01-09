@@ -71,6 +71,10 @@ body {
   color: #b0907a;
 }
 
+.wrapper {
+  position: relative;
+}
+
 .header__menupath {
   display: flex;
   align-items: center;
@@ -81,6 +85,21 @@ body {
 
 .menu {
   margin: 20px 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menu__showmore {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  .menu__showmore {
+    display: block;
+    background: #e1d4c9;
+    border: none;
+    margin-top: 50px;
+  }
 }
 .menu__title {
   text-align: center;
@@ -105,7 +124,7 @@ body {
   border-radius: 50%;
   background: #c1b6ad;
 }
-.menu__buttons button {
+.menu__buttons .menu-button {
   display: flex;
   padding: 8px 16px 8px 8px;
   justify-content: center;
@@ -126,7 +145,7 @@ body {
   background: #665f55;
   color: #e1d4c9;
 }
-.menu__buttons .unactive:hover {
+.menu__buttons .menu-button:hover {
   background: #665f55;
   color: #e1d4c9;
 }
@@ -201,6 +220,64 @@ body {
   line-height: 150%;
   color: #403f3d;
   margin: 12px 0;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: rgba(64, 63, 61, 0.8);
+  transition: all 0.3s ease;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__wrapper {
+  padding: 16px;
+  border-radius: 40px;
+  background: #e1d4c9;
+  margin: 0 16px;
+  display: flex;
+  gap: 20px;
+}
+.modal__image {
+  max-height: 340px;
+  border-radius: 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+}
+.modal__image .modal-image {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #403f3d;
+}
+.modal__title {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%;
+  margin-bottom: 12px;
+}
+.modal__text {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
+.modal .menu__buttons {
+  justify-content: flex-start;
+  margin: 8px 0 0 0;
+  flex-wrap: wrap;
 }
 
 .footer {
