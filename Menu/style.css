@@ -234,20 +234,50 @@ body {
   align-items: center;
   justify-content: center;
 }
+.modal__close {
+  display: none;
+}
+.modal__closebtn {
+  background: #e1d4c9;
+  border-radius: 100px;
+  border: 1px solid #665f55;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  color: #403f3d;
+  padding: 10px;
+  cursor: pointer;
+}
+.modal__download {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+.modal__download-text {
+  line-height: 140%;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+}
 .modal__wrapper {
   padding: 16px;
   border-radius: 40px;
   background: #e1d4c9;
+  max-width: 800px;
   margin: 0 16px;
   display: flex;
   gap: 20px;
 }
 .modal__image {
-  max-height: 340px;
-  border-radius: 40px;
-  overflow: hidden;
   display: flex;
   align-items: flex-start;
+}
+.modal__image-wrap {
+  width: 340px;
+  height: 340px;
+  border-radius: 40px;
+  overflow: hidden;
 }
 .modal__image .modal-image {
   -o-object-fit: cover;
@@ -278,6 +308,16 @@ body {
   justify-content: flex-start;
   margin: 8px 0 0 0;
   flex-wrap: wrap;
+}
+.modal__price {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 125%;
+  color: #403f3d;
 }
 
 .footer {
