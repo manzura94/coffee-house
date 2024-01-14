@@ -1,9 +1,10 @@
 const menuWrapper = document.querySelector('.menu__wrapper');
 const wrapper = document.querySelector('.wrapper');
+let showMore = document.querySelector('.menu__showmore');
 
 const create = (tagname, classname, parent) => {
     let tag = document.createElement(tagname);
-    tag.classList.add(classname);
+    Array.isArray(classname) ? tag.classList.add(...classname) : tag.classList.add(classname);
     return parent.appendChild(tag);
 };
 
@@ -17,11 +18,8 @@ let menu = fetch('./data/menu.json')
         return data;
     });
 
-// window.addEventListener('resize', function () {
-//     window.innerWidth;
-// });
-
 let typeMenu = 'coffee';
+let newdata;
 
 let display = window.innerWidth;
 window.addEventListener('resize', function () {
@@ -35,30 +33,30 @@ let displayMenu = async function (category, showBtn = false) {
     typeMenu = category;
     menuWrapper.innerHTML = '';
     if (display < 768 && showBtn != true) {
-        newdata
-            .filter((item) => item.category === `${category}`)
-            .slice(0, 4)
-            .forEach((element) => {
-                let item = create('div', 'menu__wrapper-item', menuWrapper);
-                item.setAttribute('id', element.id);
+        let filterMenu = newdata.filter((item) => item.category === `${category}`);
 
-                let imageWrap = create('div', 'menu__wrapper-image', item);
+        filterMenu.length <= 4 ? showMore.classList.add('modal__close') : showMore.classList.remove('modal__close');
+        filterMenu.slice(0, 4).forEach((element) => {
+            let item = create('div', 'menu__wrapper-item', menuWrapper);
+            item.setAttribute('id', element.id);
 
-                let itemImg = create('img', 'coffee-image', imageWrap);
-                itemImg.src = `${element.image}`;
-                itemImg.setAttribute('alt', `coffee/${element.id}`);
+            let imageWrap = create('div', 'menu__wrapper-image', item);
 
-                let itemInfo = create('div', 'menu__wrapper-info', item);
+            let itemImg = create('img', 'coffee-image', imageWrap);
+            itemImg.src = `${element.image}`;
+            itemImg.setAttribute('alt', `coffee/${element.id}`);
 
-                let subtitle = create('h4', 'menu__wrapper-subtitle', itemInfo);
-                subtitle.innerText = element.name;
+            let itemInfo = create('div', 'menu__wrapper-info', item);
 
-                let text = create('p', 'menu__wrapper-text', itemInfo);
-                text.innerText = element.description;
+            let subtitle = create('h4', 'menu__wrapper-subtitle', itemInfo);
+            subtitle.innerText = element.name;
 
-                let price = create('span', 'menu__wrapper-price', itemInfo);
-                price.innerText = `$${element.price}`;
-            });
+            let text = create('p', 'menu__wrapper-text', itemInfo);
+            text.innerText = element.description;
+
+            let price = create('span', 'menu__wrapper-price', itemInfo);
+            price.innerText = `$${element.price}`;
+        });
     } else if (showBtn === true || display > 768) {
         newdata
             .filter((item) => item.category === `${category}`)
@@ -112,19 +110,26 @@ function showModal(item, data) {
             let subtitle = create('p', 'modal__subtitle', modalButtonWrap);
             subtitle.innerText = 'Size';
             let sizeButtons = create('div', 'menu__buttons', modalButtonWrap);
-            let sizeButton = create('button', 'menu-button', sizeButtons);
+
+            let sizeButton = create('button', ['menu-button', 'active', 'size_button'], sizeButtons);
+            sizeButton.setAttribute('data-price', product.sizes.s['add-price']);
             let sizeButtonIcon = create('span', 'menu__buttons-icon', sizeButton);
             sizeButtonIcon.innerText = 'S';
             let sizeButtonText = create('span', 'menu__buttons-text', sizeButton);
             sizeButtonText.innerText = product.sizes.s.size;
 
-            let sizeButton1 = create('button', 'menu-button', sizeButtons);
+            let sizeButton1 = create('button', ['menu-button', 'size_button'], sizeButtons);
             let sizeButtonIcon1 = create('span', 'menu__buttons-icon', sizeButton1);
+            sizeButton1.setAttribute('data-price', product.sizes.m['add-price']);
+
             sizeButtonIcon1.innerText = 'M';
             let sizeButtonText1 = create('span', 'menu__buttons-text', sizeButton1);
             sizeButtonText1.innerText = product.sizes.m.size;
 
-            let sizeButton2 = create('button', 'menu-button', sizeButtons);
+            let sizeButton2 = create('button', ['menu-button', 'size_button'], sizeButtons);
+            sizeButton2.setAttribute('data-price', product.sizes.l['add-price']);
+            console.log(product.sizes, 'dddd');
+
             let sizeButtonIcon2 = create('span', 'menu__buttons-icon', sizeButton2);
             sizeButtonIcon2.innerText = 'L';
             let sizeButtonText2 = create('span', 'menu__buttons-text', sizeButton2);
@@ -136,18 +141,35 @@ function showModal(item, data) {
             let addButtons = create('div', 'menu__buttons', modalButtonWrap2);
 
             product.additives.forEach((element, num) => {
-                let addButton = create('button', 'menu-button', addButtons);
+                let addButton = create('button', ['menu-button', 'additives'], addButtons);
+                addButton.setAttribute('data-price', element['add-price']);
+
                 let addButtonIcon = create('span', 'menu__buttons-icon', addButton);
                 addButtonIcon.innerText = `${num + 1}`;
                 let addButtonText = create('span', 'menu__buttons-text', addButton);
                 addButtonText.innerText = element.name;
+                addButton.addEventListener('click', function () {
+                    addButton.classList.toggle('active');
+                    let value = addButton.getAttribute('data-price');
+
+                    let total = price.innerHTML;
+
+                    price.innerText = [...addButton.classList].includes('active')
+                        ? `${Number.parseFloat(Number(total) + Number(value)).toFixed(2)}`
+                        : `${Number.parseFloat(Number(total) - Number(value)).toFixed(2)}`;
+                });
             });
 
             let priceWrap = create('div', 'modal__price', modalInfo);
             let priceTitle = create('h4', 'modal__price-title', priceWrap);
             priceTitle.innerText = 'Total:';
             let priceNum = create('h4', 'modal__price-num', priceWrap);
-            priceNum.innerText = `$${product.price}`;
+            let priceSign = create('span', 'modal__price-sign', priceNum);
+            let price = create('span', 'modal__price-price', priceNum);
+            priceSign.innerText = '$';
+            price.innerText = product.price;
+
+            // priceNum.innerText = `${product.price}`;
 
             let download = create('div', 'modal__download', modalInfo);
             let downloadIcon = create('div', 'icon-wrap', download);
@@ -160,8 +182,25 @@ function showModal(item, data) {
             closeBtn.innerText = 'Close';
 
             document.querySelector('.body').classList.add('no-scroll');
+            let sizButtons = [...document.getElementsByClassName('size_button')];
+            sizButtons.forEach((button) => {
+                button.addEventListener('click', function () {
+                    let additives = [...document.getElementsByClassName('additives')];
+                    additives.forEach((el) => {
+                        el.classList.remove('active');
+                    });
+                    sizButtons.forEach((el) => {
+                        el.classList.remove('active');
+                    });
+                    button.classList.add('active');
+                    let value = button.getAttribute('data-price');
+                    console.log(value, 'hhhh');
 
-            closeModal(closeBtn, modal);
+                    price.innerText = `${Number.parseFloat(Number(product.price) + Number(value)).toFixed(2)}`;
+                });
+            });
+            closeModal(closeBtn, modal, modalWrap);
+            totalPrice(product.additives);
         });
     }
 }
@@ -170,7 +209,16 @@ let teaMenu = document.querySelector('.tea');
 let coffeeMenu = document.querySelector('.coffee');
 let dessertMenu = document.querySelector('.dessert');
 
-let closeModal = (button, modal) => {
+function totalPrice(buttons) {
+    for (let index = 0; index < buttons.length; index++) {
+        const element = buttons[index];
+    }
+}
+
+let closeModal = (button, modal, modalWrap) => {
+    modalWrap.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
     button.addEventListener('click', function () {
         document.querySelector('.body').classList.remove('no-scroll');
 
@@ -217,7 +265,7 @@ dessertMenu.addEventListener('click', function () {
 displayMenu('coffee');
 coffeeMenu.classList.add('active');
 
-let showMore = document.querySelector('.menu__showmore');
+// let showMore = document.querySelector('.menu__showmore');
 
 showMore.addEventListener('click', function () {
     showMore.classList.add('modal__close');
