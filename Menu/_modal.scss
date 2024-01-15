@@ -1,0 +1,112 @@
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: rgba(64, 63, 61, 0.8);
+    transition: all 0.3s ease;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+
+    &__close {
+        display: none;
+    }
+
+    &__closebtn {
+        background: $background-body;
+        border-radius: 100px;
+        border: 1px solid #665f55;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+        color: $text-dark;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    &__download {
+        display: flex;
+        gap: 8px;
+        margin: 12px 0;
+
+        &-text {
+            line-height: 140%;
+            font-size: 10px;
+            font-style: normal;
+            font-weight: 600;
+        }
+    }
+
+    &__wrapper {
+        position: fixed;
+        padding: 16px;
+        border-radius: 40px;
+        background: $background-body;
+        max-width: 800px;
+        margin: 0 16px;
+        display: flex;
+        gap: 20px;
+        z-index: 1000;
+    }
+
+    &__image {
+        display: flex;
+        align-items: flex-start;
+
+        &-wrap {
+            width: 340px;
+            height: 340px;
+            border-radius: 40px;
+            overflow: hidden;
+        }
+
+        .modal-image {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        color: $text-dark;
+    }
+
+    &__title {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%;
+        margin-bottom: 12px;
+    }
+
+    &__text {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+    }
+
+    .menu__buttons {
+        justify-content: flex-start;
+        margin: 8px 0 0 0;
+        flex-wrap: wrap;
+    }
+
+    &__price {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%;
+        color: $text-dark;
+    }
+}

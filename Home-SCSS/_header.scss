@@ -1,93 +1,169 @@
-
-
 .header {
+  width: 100%;
+  margin-bottom: 20px;
+
+  &__logo {
+    cursor: pointer;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    margin-bottom: 20px;
-  
-    &__logo {
-      cursor: pointer;
-    }
+  }
 
-  
-    &__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-  
-    &__menu {
+  .showMenu {
+    transform: translateX(0%);
+  }
 
-      &-items {
-        display: flex;
-        gap: 40px;
-      }
+  &__menu {
+    display: flex;
 
-      @include media(900){
-        display: none;
-      }
-
-  
-      &-item {
-        a {
-          color: $text-dark;
-          cursor: pointer;
-          font-size: 16px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 150%;
-        }
-      }
-    }
-
-    &__burger-button{
+    .burger__menu {
       display: none;
 
-      @include media(900){
-        display: block;
+      @include media(768) {
+        display:block;
       }
     }
-  
-    .menupath {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      position: relative;
-  
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color: #403f3d;
-        transform-origin: bottom right;
-        transition: transform 0.55s ease-in-out;
-      }
-  
-      &:hover:after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-      }
 
-      @include media(900){
-        display: none;
+    &-items {
+      display: flex;
+      gap: 40px;
+
+      @include media(768) {
+        flex-direction: column;
+        gap: 60px;
       }
-  
-      &__link {
+    }
+
+    @include media(768) {
+      position: absolute;
+      top: 100px;
+      transform: translateX(100%);
+      transition: transform 0.2s ease-in-out;
+      right: 0;
+      left: 0;
+      z-index: 99;
+      width: 100%;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
+      gap: 100px;
+      background-color: $background-body;
+      padding: 40px;
+    }
+
+    &-item {
+      a {
+        color: $text-dark;
+        cursor: pointer;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
         line-height: 150%;
-        color: $text-dark;
-      }
-  
-      &__icon {
-        display: inline-block;
-        margin-bottom: 5px;
       }
     }
   }
+
+  &__burger-button {
+    display: none;
+
+    @include media(768) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $text-dark;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      background: $background-body;
+      position: relative;
+    }
+
+    .line {
+      display: block;
+      width: 22px;
+      height: 16px;
+      position: absolute;
+      top: 25px;
+      transition: all 0.2s ease-in-out;
+
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        height: 0;
+        border-bottom: 1.5px solid $text-dark;
+        border-radius: 5px;
+        width: 100%;
+        left: 0;
+        right: 0;
+        transition: all ease-out 0.3s;
+        transform-origin: center;
+      }
+
+      &:after {
+        top: 0%;
+      }
+
+      &.active-menu {
+        &:after {
+          transform: rotate(-45deg);
+          top: -20%;
+        }
+
+        &:before {
+          transform: rotate(45deg);
+          // transform-origin: center;
+          top: -20%;
+        }
+      }
+    }
+  }
+
+  .menupath {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #403f3d;
+      transform-origin: bottom right;
+      transition: transform 0.55s ease-in-out;
+    }
+
+    &:hover:after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    @include media(768) {
+      display: none;
+    }
+
+    &__link {
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 150%;
+      color: $text-dark;
+    }
+
+    &__icon {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  }
+}

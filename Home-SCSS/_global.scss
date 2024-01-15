@@ -8,6 +8,7 @@
     padding: 20px 40px 40px;
     background: $background-body;
     align-items: center;
+    position: relative;
 
     @include media(685){
       padding: 20px 16px 40px;
