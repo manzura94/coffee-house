@@ -232,10 +232,10 @@ body {
 .homepage {
   display: flex;
   border-radius: 40px;
-  background-image: url("./images/homepage-banner.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  position: relative;
+  isolation: isolate;
+  border-radius: 40px;
+  overflow: hidden;
   padding-left: 100px;
   padding-right: 100px;
   padding-top: 100px;
@@ -243,34 +243,22 @@ body {
 }
 @media (max-width: 1440px) {
   .homepage {
-    padding-left: calc(
-                16px + 84 *
-                    ((100vw - 320px) / 1120)
-            );
+    padding-left: calc(16px + 84 * (100vw - 320px) / 1120);
   }
 }
 @media (max-width: 1440px) {
   .homepage {
-    padding-right: calc(
-                16px + 84 *
-                    ((100vw - 320px) / 1120)
-            );
+    padding-right: calc(16px + 84 * (100vw - 320px) / 1120);
   }
 }
 @media (max-width: 1440px) {
   .homepage {
-    padding-top: calc(
-                60px + 40 *
-                    ((100vw - 320px) / 1120)
-            );
+    padding-top: calc(60px + 40 * (100vw - 320px) / 1120);
   }
 }
 @media (max-width: 1440px) {
   .homepage {
-    padding-bottom: calc(
-                60px + 40 *
-                    ((100vw - 320px) / 1120)
-            );
+    padding-bottom: calc(60px + 40 * (100vw - 320px) / 1120);
   }
 }
 .homepage__banner {
@@ -362,6 +350,16 @@ body {
   display: unset;
 }
 
+#hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
 .favourite {
   width: 100%;
   display: flex;
@@ -382,6 +380,7 @@ body {
   gap: 16px;
   width: 50%;
   text-align: center;
+  -webkit-transition: 0.6s ease;
   transition: 0.6s ease;
 }
 @media only screen and (max-width: 600px) {
@@ -392,8 +391,7 @@ body {
 .favourite .fade__image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .favourite .fade__title {
   font-size: 24px;
@@ -422,14 +420,11 @@ body {
   position: absolute;
   top: 50%;
   margin-top: -22px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 @media only screen and (max-width: 600px) {
   .favourite .prev,
-.favourite .next {
+  .favourite .next {
     display: none;
   }
 }
@@ -461,8 +456,48 @@ body {
   display: inline-block;
   transition: background-color 0.6s ease;
 }
-.favourite .active, .favourite .dot:hover {
+.favourite .active,
+.favourite .dot:hover {
   background-color: #665f55;
+}
+
+.carousel-scrollbar {
+  margin-top: 16px;
+  padding: 4px 0;
+}
+.carousel-scrollbar .scrollbar-track {
+  border-radius: 999px;
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.carousel-scrollbar .scrollbar-thumb {
+  width: 20%;
+  height: 100%;
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: transform 200ms, background-color 200ms, height 200ms;
+}
+.carousel-scrollbar .scrollbar-thumb::after {
+  content: "";
+  display: block;
+  height: 16px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+.carousel-scrollbar .scrollbar-thumb:hover {
+  height: 250%;
+}
+.carousel-scrollbar .scrollbar-thumb.dragging, .carousel-scrollbar .scrollbar-thumb.dragging:hover {
+  background-color: rgb(0, 0, 0);
+  height: 400%;
+}
+.carousel-scrollbar .scrollbar-thumb.dragging::after {
+  height: 24px;
 }
 
 .gallery__title {
@@ -528,8 +563,7 @@ body {
 .gallery__image img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 20px;
   transition: transform 1s, filter 2s ease-in-out;
   transform: scale(1.2);
@@ -547,10 +581,7 @@ body {
 }
 @media (max-width: 1440px) {
   .download {
-    gap: calc(
-                50px + 50 *
-                    ((100vw - 320px) / 1120)
-            );
+    gap: calc(50px + 50 * (100vw - 320px) / 1120);
   }
 }
 @media only screen and (max-width: 1030px) {
@@ -610,8 +641,7 @@ body {
 .download__banner img {
   width: 100%;
   height: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   vertical-align: top;
 }
 
@@ -696,8 +726,6 @@ body {
 .footer__right .contacts .phone {
   cursor: pointer;
   position: relative;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .footer__right .contacts .address:after,
