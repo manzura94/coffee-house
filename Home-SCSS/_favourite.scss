@@ -1,132 +1,162 @@
 .favourite {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-
-  &__slideshow {
-    max-width: 1440px;
     width: 100%;
-    position: relative;
-    margin: 40px auto;
-    display: flex;
-    justify-content: center;
-
-
-  }
-
-
- 
-
-  .fade {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 50%;
     text-align: center;
-    // position: absolute;
-    -webkit-transition: 0.6s ease;
-    transition: 0.6s ease;
 
-  
-
-   
-
-    @include media(600){
-      width: 100%;
-    }
-
-    &__image{
-
-      img{
+    &__slideshow {
+        max-width: 1440px;
         width: 100%;
+        position: relative;
+        margin: 40px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .fade {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 50%;
+        text-align: center;
+        // position: absolute;
+        -webkit-transition: 0.6s ease;
+        transition: 0.6s ease;
+
+        @include media(600) {
+            width: 100%;
+        }
+
+        &__image {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        &__title {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 125%;
+            color: $text-dark;
+        }
+
+        &__desc {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: $text-dark;
+        }
+
+        &__price {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 125%;
+            color: $text-dark;
+        }
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        margin-top: -22px;
+        user-select: none;
+
+        @include media(600) {
+            display: none;
+        }
+
+        &:hover {
+            svg {
+                fill: $background-container;
+            }
+
+            svg path {
+                stroke: $text-light;
+            }
+        }
+    }
+
+    .next {
+        right: 0;
+    }
+
+    .prev {
+        left: 0;
+    }
+
+    .slider-dots {
+        display: flex;
+        justify-content: center;
+    }
+
+    .dot {
+        cursor: pointer;
+        height: 4px;
+        width: 40px;
+        margin: 0 2px;
+        background-color: $border-light;
+        border-radius: 100px;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+        background-color: $border-dark;
+    }
+}
+
+.carousel-scrollbar {
+    margin-top: 16px;
+    padding: 4px 0;
+
+    .scrollbar-track {
+        border-radius: 999px;
+        height: 2px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .scrollbar-thumb {
+        width: 20%;
         height: 100%;
-        object-fit: contain;
-      }
+        border-radius: 999px;
+        cursor: pointer;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: transform 200ms, background-color 200ms, height 200ms;
+
+        &::after {
+            content: '';
+            display: block;
+            height: 16px;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        &:hover {
+            height: 250%;
+        }
+
+        &.dragging,
+        &.dragging:hover {
+            background-color: rgba(0, 0, 0, 1);
+            height: 400%;
+        }
+
+        &.dragging {
+            &::after {
+                height: 24px;
+            }
+        }
     }
-
-    &__title {
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 125%;
-      color: $text-dark;
-    }
-
-    &__desc {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 150%;
-      color: $text-dark;
-    }
-
-    &__price {
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 125%;
-      color: $text-dark;
-    }
-  }
-
-
-
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    margin-top: -22px;
-    user-select: none;
-
-    @include media(600){
-      display: none;
-    }
-
-
-
-    &:hover {
-
-      svg {
-        fill: $background-container;
-
-      }
-
-      svg path {
-        stroke: $text-light;
-      }
-
-    }
-
-  }
-
-  .next {
-    right: 0;
-  }
-
-  .prev{
-    left: 0;
-  }
-
-  .slider-dots{
-    display: flex;
-    justify-content: center;
-  }
-
-  .dot{
-    cursor: pointer;
-    height: 4px;
-    width: 40px;
-    margin: 0 2px;
-    background-color: $border-light;
-    border-radius: 100px;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-  }
-
-  .active, .dot:hover {
-    background-color: $border-dark;
-  }
-  
 }
