@@ -1,0 +1,38 @@
+
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 100%;
+    padding: 20px 40px 40px;
+    background: $background-body;
+    align-items: center;
+    position: relative;
+
+    @include media(685){
+      padding: 20px 16px 40px;
+    }
+
+  }
+  
+  [class*="__container"] {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  [class*="__title"]{
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%;
+    color: $text-dark;
+
+    @include media(600){
+      font-size: 32px;
+    }
+
+    i {
+      color: $text-accent;
+    }
+  } 

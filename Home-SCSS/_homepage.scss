@@ -1,0 +1,124 @@
+.mainpage {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.homepage {
+    display: flex;
+    border-radius: 40px;
+    position: relative;
+    isolation: isolate;
+    border-radius: 40px;
+    overflow: hidden;
+    background-color: $background-container;
+    @include adaptive-value('padding-left', 100, 16, 1);
+    @include adaptive-value('padding-right', 100, 16, 1);
+    @include adaptive-value('padding-top', 100, 60, 1);
+    @include adaptive-value('padding-bottom', 100, 60, 1);
+
+    &__banner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 50%;
+        gap: 40px;
+
+        @include media(1280) {
+            width: 60%;
+        }
+
+        @include media(1065) {
+            width: 70%;
+        }
+
+        @include media(914) {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        font-weight: 600;
+        line-height: 105%;
+        color: $text-light;
+        font-size: 72px;
+
+        @include media(645) {
+            font-size: 42px;
+        }
+
+        i {
+            color: $text-accent;
+        }
+    }
+
+    &__desc {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 150%;
+        color: $text-light;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 20px 78px;
+        border-radius: 100px;
+        background: $background-body;
+        border: none;
+        cursor: pointer;
+        position: relative;
+
+        &::after {
+            content: url('./images/icons/coffee-cup.svg');
+            position: absolute;
+            left: 40px;
+            top: 21px;
+            width: 100%;
+            transform: scaleX(0);
+            background-color: #403f3d;
+            height: 0;
+            transition: transform 0.55s ease-in-out;
+
+            @include media(900) {
+                left: 130px;
+                transform: none;
+            }
+        }
+
+        &:hover:after {
+            transform: scaleX(1);
+        }
+
+        span {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+            color: $text-dark;
+        }
+
+        .homepage__button-icon {
+            display: none;
+        }
+
+        &:hover {
+            .homepage__button-icon {
+                display: unset;
+            }
+        }
+    }
+}
+
+#hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
