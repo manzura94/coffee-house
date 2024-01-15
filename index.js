@@ -52,7 +52,6 @@ function currentSlide(n) {
 }
 
 const updateScrollThumbPosition = () => {
-    console.log('hello');
     const scrollPosition = imageList.scrollLeft;
     const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
     scrollbarThumb.style.left = `${thumbPosition}px`;
