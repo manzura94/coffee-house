@@ -34,8 +34,14 @@ for (let index = 0; index < links.length; index++) {
     });
 }
 
+// Slide
+const imageList = document.querySelector('.favourite__slideshow');
+const scrollbarThumb = document.querySelector('.scrollbar-thumb');
+const sliderScrollbar = document.querySelector('.slider-scrollbar');
+
+const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+const screenWidth = window.innerWidth;
 let slideIndex = 1;
-showSlides(slideIndex);
 
 function plusSlides(n) {
     showSlides((slideIndex += n));
@@ -44,6 +50,17 @@ function plusSlides(n) {
 function currentSlide(n) {
     showSlides((slideIndex = n));
 }
+
+const updateScrollThumbPosition = () => {
+    console.log('hello');
+    const scrollPosition = imageList.scrollLeft;
+    const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth - scrollbarThumb.offsetWidth);
+    scrollbarThumb.style.left = `${thumbPosition}px`;
+};
+
+imageList.addEventListener('scroll', () => {
+    updateScrollThumbPosition();
+});
 
 function showSlides(n) {
     let i;
@@ -66,7 +83,25 @@ function showSlides(n) {
     dots[slideIndex - 1].className += ' active';
 }
 
-let timer = setInterval(function () {
-    slideIndex++;
+let timer = null;
+
+if (screenWidth > 768) {
     showSlides(slideIndex);
-}, 6000);
+    timer = setInterval(function () {
+        slideIndex++;
+        showSlides(slideIndex);
+    }, 6000);
+}
+
+window.addEventListener('resize', function (event) {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 768) {
+        clearInterval(timer);
+        const slides = [...document.getElementsByClassName('favourite__slides')];
+
+        slides.forEach((el) => (el.style.display = 'flex'));
+    } else {
+        showSlides(slideIndex);
+    }
+});
