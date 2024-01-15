@@ -128,7 +128,6 @@ function showModal(item, data) {
 
             let sizeButton2 = create('button', ['menu-button', 'size_button'], sizeButtons);
             sizeButton2.setAttribute('data-price', product.sizes.l['add-price']);
-            console.log(product.sizes, 'dddd');
 
             let sizeButtonIcon2 = create('span', 'menu__buttons-icon', sizeButton2);
             sizeButtonIcon2.innerText = 'L';
@@ -194,7 +193,6 @@ function showModal(item, data) {
                     });
                     button.classList.add('active');
                     let value = button.getAttribute('data-price');
-                    console.log(value, 'hhhh');
 
                     price.innerText = `${Number.parseFloat(Number(product.price) + Number(value)).toFixed(2)}`;
                 });
