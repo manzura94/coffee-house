@@ -1,28 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
 
+@import './Home-SCSS/normalize';
 
-@import "./Home-SCSS/normalize";
-
-@import "./Home-SCSS/mixin";
-@import "./Home-SCSS/media-mixin";
-@import "./Home-SCSS/variables";
-@import "./Home-SCSS/global";
-@import "./Home-SCSS/header";
-@import "./Home-SCSS/homepage";
-@import "./Home-SCSS/favourite";
-@import "./Home-SCSS/gallery";
-@import "./Home-SCSS/download";
-@import "./Home-SCSS/footer";
-
-
-
-
-
-
-
-
-
-
-
-
-
+@import './Home-SCSS/mixin';
+@import './Home-SCSS/media-mixin';
+@import './Home-SCSS/variables';
+@import './Home-SCSS/global';
+@import './Home-SCSS/header';
+@import './Home-SCSS/homepage';
+@import './Home-SCSS/favourite';
+@import './Home-SCSS/gallery';
+@import './Home-SCSS/download';
+@import './Home-SCSS/footer';
