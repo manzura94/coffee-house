@@ -11,7 +11,7 @@
     gap: 24px;
   }
 
-  &__button{
+  &__button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +24,15 @@
     flex-direction: column;
     gap: 24px;
 
+    &__error-msg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgb(209, 2, 2);
+      font-weight: bold;
+      font-style: italic;
+    }
+
     &__input {
       padding: 16px 12px;
       background: none;
@@ -33,41 +42,56 @@
       margin: 4px;
     }
 
-    &__label{
-        font-weight: 400;
-        font-size: 16px;
-        letter-spacing: 0%;
-        color: #403F3D;
-        line-height: 150%;
+    &__label {
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0%;
+      color: #403f3d;
+      line-height: 150%;
     }
 
     &__group {
       display: flex;
       flex-direction: column;
       width: 100%;
+
+      .invalid {
+        color: rgb(189, 2, 2);
+      }
     }
 
-    &__button{
+    &__button {
       padding: 10px 53px;
       background: none;
       border-radius: 100px;
-      border: 1px solid #665F55;
+      border: 1px solid #665f55;
       font-size: 16px;
       font-weight: 600;
-      color: #403F3D;
+      color: #403f3d;
       margin-top: 16px;
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
-    .payment-options{
-        margin-top: 20px;
-        display: flex;
-        gap: 24px;
+    .activate-button {
+      opacity: 1;
+      cursor: pointer;
+    }
 
-        
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+      cursor: wait;
+    }
+
+    .payment-options {
+      margin-top: 20px;
+      display: flex;
+      gap: 24px;
     }
 
     input[type="radio"] {
-      appearance: none; 
+      appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
       width: 16px;
@@ -86,6 +110,7 @@
       &:focus {
         outline: none;
         box-shadow: 0 0 0 2px rgba(102, 95, 85, 0.4);
-      }}
+      }
+    }
   }
 }
