@@ -1,4 +1,5 @@
 import "./styles/style.scss";
+import { AuthResponse } from "./types/auth.interface";
 
 const form = document.querySelector<HTMLFormElement>(".register__form")!;
 const inputs = document.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
@@ -37,9 +38,9 @@ function clearError(input: HTMLElement | HTMLSelectElement) {
   errorEl.textContent = "";
 }
 
-const validateLogin = (value: string) => /^[A-Za-z][A-Za-z]{2,}$/.test(value);
+const validateLogin = (value: string) => /^[A-Za-z][A-Za-z0-9]{2,}$/.test(value);
 const validatePassword = (value: string) =>
-  /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{6,}$/.test(value);
+  /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/.test(value);
 const validateConfirmPassword = (pw: string, confirm: string) => pw === confirm;
 const validateCity = (value: string) => value.trim() !== "";
 const validateStreet = (value: string) => value.trim() !== "";
@@ -169,15 +170,18 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(userData),
     });
 
-    const data = await response.json();
-
+    const data  = await response.json();
+    console.log(data);
+    
     if (!response.ok) {
       showFormError(data.error || "Registration failed. Try again.");
-      console.log(data);
 
       resetButton();
       return;
     }
+
+     localStorage.setItem('token', data.data.access_token);
+    localStorage.setItem('user', JSON.stringify(data.data.user));
 
     registerBtn.textContent = "Success!";
     setTimeout(() => {
@@ -187,7 +191,6 @@ form.addEventListener("submit", async (e) => {
     showFormError("Network error. Please try again later.");
     resetButton();
   }
-  console.log(userData);
 });
 
 function resetButton() {

@@ -906,4 +906,26 @@ body {
   box-shadow: 0 0 0 2px rgba(102, 95, 85, 0.4);
 }
 
+.signin__title {
+  margin-top: 20px;
+}
+.signin__form {
+  width: 40%;
+  margin-top: 40px;
+}
+.signin__inputs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.signin .activate-button {
+  opacity: 1;
+  cursor: pointer;
+}
+.signin .loading {
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: wait;
+}
+
 /*# sourceMappingURL=styles.css.map */

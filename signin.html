@@ -50,11 +50,11 @@
           </button>
         </div>
       </header>
-      <main class="sign-in">
-        <h1 class="sign-in__title">Sign In</h1>
-        <form class="register__form form">
+      <main class="register signin">
+        <h1 class="signin__title">Sign In</h1>
+        <form class="register__form signin__form">
           <p class="form__error-msg"></p>
-          <div class="register__inputs">
+          <div class="register__inputs signin__inputs">
             <div class="form__group">
               <label for="login" class="form__label">Login</label>
               <input
@@ -76,60 +76,9 @@
               />
               <small class="error"></small>
             </div>
-
-            <div class="form__group">
-              <label for="confirm-password" class="form__label"
-                >Confirm Password</label
-              >
-              <input
-                type="password"
-                id="confirm-password"
-                class="form__input"
-                placeholder="Confirm password"
-              />
-              <small class="error"></small>
+            <div class="register__inputs register__button">
+              <button class="form__button">Sign In</button>
             </div>
-          </div>
-          <div class="register__inputs">
-            <div class="form__group">
-              <label for="city" class="form__label">City</label>
-              <select id="city" class="form__input">
-                <option value="">Select city</option>
-                <option value="newyork">New York</option>
-                <option value="london">London</option>
-                <option value="toronto">Toronto</option>
-              </select>
-              <small class="error"></small>
-            </div>
-            <div class="form__group">
-              <label for="street" class="form__label">Street</label>
-              <select id="street" class="form__input">
-                <option value="">Select street</option>
-              </select>
-              <small class="error"></small>
-            </div>
-            <div class="form__group">
-              <label for="house" class="form__label">House number</label>
-              <input type="number" id="house" class="form__input" />
-              <small class="error"></small>
-            </div>
-            <div class="form__group">
-              <label class="form__label">Pay by</label>
-              <div class="payment-options">
-                <label
-                  ><input type="radio" name="payment" value="cash" />
-                  Cash</label
-                >
-                <label
-                  ><input type="radio" name="payment" value="card" />
-                  Card</label
-                >
-              </div>
-              <small class="error"></small>
-            </div>
-          </div>
-          <div class="register__inputs register__button">
-            <button class="form__button">Registration</button>
           </div>
         </form>
       </main>
@@ -253,5 +202,5 @@
       </footer>
     </div>
   </body>
-  <!-- <script type="module" src="/src/register.ts"></script> -->
+  <script type="module" src="/src/signin.ts"></script>
 </html>
