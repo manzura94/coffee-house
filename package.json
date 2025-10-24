@@ -27,7 +27,6 @@
     "@typescript-eslint/parser": "^8.46.1",
     "eslint": "^9.37.0",
     "sass": "^1.93.2",
-    "sass-embedded": "^1.93.2",
     "typescript": "^5.9.3",
     "vite": "^7.1.10"
   },
@@ -71,7 +70,6 @@
     "find-up": "^5.0.0",
     "flat-cache": "^4.0.1",
     "flatted": "^3.3.3",
-    "fsevents": "^2.3.3",
     "glob-parent": "^6.0.2",
     "globals": "^14.0.0",
     "graphemer": "^1.4.0",
@@ -117,7 +115,6 @@
     "rollup": "^4.52.4",
     "run-parallel": "^1.2.0",
     "rxjs": "^7.8.2",
-    "sass-embedded-darwin-x64": "^1.93.2",
     "semver": "^7.7.3",
     "shebang-command": "^2.0.0",
     "shebang-regex": "^3.0.0",
@@ -137,8 +134,7 @@
     "word-wrap": "^1.2.5",
     "yocto-queue": "^0.1.0"
   },
-   "optionalDependencies": {
+  "optionalDependencies": {
     "fsevents": "2.3.3"
   }
-  
 }
