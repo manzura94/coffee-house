@@ -136,5 +136,9 @@
     "which": "^2.0.2",
     "word-wrap": "^1.2.5",
     "yocto-queue": "^0.1.0"
+  },
+   "optionalDependencies": {
+    "fsevents": "2.3.3"
   }
+  
 }
