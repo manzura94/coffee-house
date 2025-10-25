@@ -10,13 +10,11 @@ const create = (tagname, classname, parent) => {
   return parent.appendChild(tag);
 };
 
-// let menuGlobal = [];
 let menu = fetch("./data/menu.json")
   .then((response) => {
     return response.json();
   })
   .then((data) => {
-    // menuGlobal = data;
     return data;
   });
 
@@ -283,7 +281,6 @@ dessertMenu.addEventListener("click", function () {
 displayMenu("coffee");
 coffeeMenu.classList.add("active");
 
-// let showMore = document.querySelector('.menu__showmore');
 
 showMore.addEventListener("click", function () {
   showMore.classList.add("modal__close");

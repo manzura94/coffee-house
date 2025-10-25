@@ -11,6 +11,7 @@ const lineButton = document.querySelector(".line") as HTMLElement;
 const burgerMenu = document.querySelector(".header__menu") as HTMLElement;
 const body = document.querySelector(".wrapper") as HTMLElement;
 const links = document.getElementsByClassName("header__menu-item");
+const favoriteSection = document.querySelector('.favourite__slideshow')! as HTMLElement;
 
 const imageList = document.querySelector(".slides-container") as HTMLElement;
 const prevBtn = document.querySelector(".btn.prev") as HTMLElement;
@@ -101,10 +102,14 @@ async function fetchFavoriteCoffees() {
   try {
     showLoader();
     const res = await fetch(FAVORITES_ENDPOINT);
+    console.log(res);
+    
     if (!res.ok) {
       showError();
     }
     const data = await res.json();
+    console.log(data);
+    
     const coffees = data.data.map((coffee: ICoffee, i: number) => ({
       ...coffee,
       imageUrl: placeholders[i % placeholders.length],
