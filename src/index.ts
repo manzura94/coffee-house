@@ -11,12 +11,15 @@ const lineButton = document.querySelector(".line") as HTMLElement;
 const burgerMenu = document.querySelector(".header__menu") as HTMLElement;
 const body = document.querySelector(".wrapper") as HTMLElement;
 const links = document.getElementsByClassName("header__menu-item");
-const favoriteSection = document.querySelector('.favourite__slideshow')! as HTMLElement;
+
 
 const imageList = document.querySelector(".slides-container") as HTMLElement;
 const prevBtn = document.querySelector(".btn.prev") as HTMLElement;
 const nextBtn = document.querySelector(".btn.next") as HTMLElement;
 const dotsContainer = document.querySelector(".slider-dots") as HTMLElement;
+const shoppingCart = document.querySelector<HTMLElement>('.shopping-cart')!;
+console.log(shoppingCart);
+
 const scrollbarThumb = document.querySelector(
   ".scrollbar-thumb",
 ) as HTMLElement;
@@ -72,7 +75,14 @@ if (screenWidth > 768) {
     slideIndex++;
     showSlides(slideIndex);
   }, 6000);
-}
+};
+
+function isLoggedIn() {
+ return !!localStorage.getItem('token');
+};
+
+const isUserLogged = isLoggedIn();
+shoppingCart.classList.toggle('hidden', !isUserLogged);
 
 const updateScrollThumbPosition = () => {
   const scrollPosition = imageList.scrollLeft;
@@ -108,12 +118,12 @@ async function fetchFavoriteCoffees() {
       showError();
     }
     const data = await res.json();
-    console.log(data);
     
     const coffees = data.data.map((coffee: ICoffee, i: number) => ({
       ...coffee,
       imageUrl: placeholders[i % placeholders.length],
     }));
+    console.log(coffees, 'data');
 
     return coffees;
   } catch {

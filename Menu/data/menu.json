@@ -442,6 +442,150 @@
       }
     ]
   },
+   {
+    "name": "Moroccan",
+    "description": "Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint",
+    "price": "4.50",
+    "image": "./images/tea-1.jpg",
+    "id": 13,
+    "category": "tea",
+    "sizes": {
+      "s": {
+        "size": "200 ml",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "300 ml",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "400 ml",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Sugar",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Lemon",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Syrup",
+        "add-price": "0.50"
+      }
+    ]
+  },
+   {
+    "name": "Moroccan",
+    "description": "Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint",
+    "price": "4.50",
+    "image": "./images/tea-1.jpg",
+    "id": 14,
+    "category": "tea",
+    "sizes": {
+      "s": {
+        "size": "200 ml",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "300 ml",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "400 ml",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Sugar",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Lemon",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Syrup",
+        "add-price": "0.50"
+      }
+    ]
+  },
+   {
+    "name": "Moroccan",
+    "description": "Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint",
+    "price": "4.50",
+    "image": "./images/tea-1.jpg",
+    "id": 29,
+    "category": "tea",
+    "sizes": {
+      "s": {
+        "size": "200 ml",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "300 ml",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "400 ml",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Sugar",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Lemon",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Syrup",
+        "add-price": "0.50"
+      }
+    ]
+  },
+   {
+    "name": "Moroccan",
+    "description": "Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint",
+    "price": "4.50",
+    "image": "./images/tea-1.jpg",
+    "id": 30,
+    "category": "tea",
+    "sizes": {
+      "s": {
+        "size": "200 ml",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "300 ml",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "400 ml",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Sugar",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Lemon",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Syrup",
+        "add-price": "0.50"
+      }
+    ]
+  },
 
   {
     "name": "Marble cheesecake",
@@ -485,7 +629,7 @@
     "description": "Layer cake with cream cheese frosting",
     "price": "4.00",
     "image": "./images/dessert-2.jpg",
-    "id": 14,
+    "id": 17,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -522,7 +666,7 @@
     "description": "Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar",
     "price": "4.50",
     "image": "./images/dessert-3.jpg",
-    "id": 15,
+    "id": 18,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -559,7 +703,7 @@
     "description": "Delicate creamy dessert in a caramel basket with wild berries",
     "price": "4.00",
     "image": "./images/dessert-4.jpg",
-    "id": 16,
+    "id": 19,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -596,7 +740,7 @@
     "description": "Tender pancakes with strawberry jam and fresh strawberries",
     "price": "4.50",
     "image": "./images/dessert-5.jpg",
-    "id": 17,
+    "id": 20,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -633,7 +777,7 @@
     "description": "Classic honey cake with delicate custard",
     "price": "4.50",
     "image": "./images/dessert-6.jpg",
-    "id": 18,
+    "id": 21,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -670,7 +814,7 @@
     "description": "Cake with hot chocolate filling and nuts with dried apricots",
     "price": "5.50",
     "image": "./images/dessert-7.jpg",
-    "id": 19,
+    "id": 22,
     "category": "dessert",
     "sizes": {
       "s": {
@@ -707,7 +851,339 @@
     "description": "A combination of thin sponge cake with cherry jam and light chocolate mousse",
     "price": "6.50",
     "image": "./images/dessert-8.jpg",
-    "id": 20,
+    "id": 23,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+   {
+    "name": "Red velvet",
+    "description": "Layer cake with cream cheese frosting",
+    "price": "4.00",
+    "image": "./images/dessert-2.jpg",
+    "id": 24,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Cheesecakes",
+    "description": "Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar",
+    "price": "4.50",
+    "image": "./images/dessert-3.jpg",
+    "id": 25,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Creme brulee",
+    "description": "Delicate creamy dessert in a caramel basket with wild berries",
+    "price": "4.00",
+    "image": "./images/dessert-4.jpg",
+    "id": 26,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Pancakes",
+    "description": "Tender pancakes with strawberry jam and fresh strawberries",
+    "price": "4.50",
+    "image": "./images/dessert-5.jpg",
+    "id": 27,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Honey cake",
+    "description": "Classic honey cake with delicate custard",
+    "price": "4.50",
+    "image": "./images/dessert-6.jpg",
+    "id": 28,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Chocolate cake",
+    "description": "Cake with hot chocolate filling and nuts with dried apricots",
+    "price": "5.50",
+    "image": "./images/dessert-7.jpg",
+    "id": 29,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Black forest",
+    "description": "A combination of thin sponge cake with cherry jam and light chocolate mousse",
+    "price": "6.50",
+    "image": "./images/dessert-8.jpg",
+    "id": 30,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Chocolate cake",
+    "description": "Cake with hot chocolate filling and nuts with dried apricots",
+    "price": "5.50",
+    "image": "./images/dessert-7.jpg",
+    "id": 31,
+    "category": "dessert",
+    "sizes": {
+      "s": {
+        "size": "50 g",
+        "add-price": "0.00"
+      },
+      "m": {
+        "size": "100 g",
+        "add-price": "0.50"
+      },
+      "l": {
+        "size": "200 g",
+        "add-price": "1.00"
+      }
+    },
+    "additives": [
+      {
+        "name": "Berries",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Nuts",
+        "add-price": "0.50"
+      },
+      {
+        "name": "Jam",
+        "add-price": "0.50"
+      }
+    ]
+  },
+
+  {
+    "name": "Black forest",
+    "description": "A combination of thin sponge cake with cherry jam and light chocolate mousse",
+    "price": "6.50",
+    "image": "./images/dessert-8.jpg",
+    "id": 32,
     "category": "dessert",
     "sizes": {
       "s": {
