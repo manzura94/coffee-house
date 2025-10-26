@@ -1,0 +1,27 @@
+.signin {
+  &__title {
+    margin-top: 20px;
+  }
+
+  &__form {
+    width: 40%;
+    margin-top: 40px;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .activate-button {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .loading {
+    opacity: 0.7;
+    pointer-events: none;
+    cursor: wait;
+  }
+}
