@@ -281,7 +281,6 @@ dessertMenu.addEventListener("click", function () {
 displayMenu("coffee");
 coffeeMenu.classList.add("active");
 
-
 showMore.addEventListener("click", function () {
   showMore.classList.add("modal__close");
   displayMenu(typeMenu, (showBtn = true));

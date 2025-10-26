@@ -38,9 +38,12 @@ function clearError(input: HTMLElement | HTMLSelectElement) {
   errorEl.textContent = "";
 }
 
-const validateLogin = (value: string) => /^[A-Za-z][A-Za-z0-9]{2,}$/.test(value);
+const validateLogin = (value: string) =>
+  /^[A-Za-z][A-Za-z0-9]{2,}$/.test(value);
 const validatePassword = (value: string) =>
-  /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/.test(value);
+  /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-])[A-Za-z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]{6,}$/.test(
+    value,
+  );
 const validateConfirmPassword = (pw: string, confirm: string) => pw === confirm;
 const validateCity = (value: string) => value.trim() !== "";
 const validateStreet = (value: string) => value.trim() !== "";
@@ -71,7 +74,7 @@ inputs.forEach((input) => {
     switch (input.id) {
       case "login":
         if (value === "") showError(input, "Login must be entered");
-       else if (!validateLogin(value))
+        else if (!validateLogin(value))
           showError(
             input,
             "Login must be at least 3 letters and start with a letter",
@@ -89,7 +92,7 @@ inputs.forEach((input) => {
       case "confirm-password":
         const password =
           document.querySelector<HTMLInputElement>("#password")!.value;
-          if (value === "") showError(input, "Please confirm your password");
+        if (value === "") showError(input, "Please confirm your password");
         else if (!validateConfirmPassword(password, value))
           showError(input, "Passwords do not match");
         break;
@@ -170,9 +173,9 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(userData),
     });
 
-    const data  = await response.json();
+    const data = await response.json();
     console.log(data);
-    
+
     if (!response.ok) {
       showFormError(data.error || "Registration failed. Try again.");
 
@@ -180,8 +183,8 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-     localStorage.setItem('token', data.data.access_token);
-    localStorage.setItem('user', JSON.stringify(data.data.user));
+    localStorage.setItem("token", data.data.access_token);
+    localStorage.setItem("user", JSON.stringify(data.data.user));
 
     registerBtn.textContent = "Success!";
     setTimeout(() => {

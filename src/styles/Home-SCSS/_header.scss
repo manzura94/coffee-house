@@ -13,30 +13,30 @@
     width: 100%;
   }
 
-  &__icons{
+  &__icons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 32px;
   }
 
-  &__shopping-cart{
+  &__shopping-cart {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
   }
 
-  .hidden{
+  .hidden {
     display: none;
   }
 
-  .cart-items{
+  .cart-items {
     font-size: 16px;
     font-weight: 600;
   }
 
-  .cartpath__link{
+  .cartpath__link {
     margin-bottom: 4px;
     cursor: pointer;
   }

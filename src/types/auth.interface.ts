@@ -4,7 +4,7 @@ export interface User {
   city: string;
   street: string;
   houseNumber: number;
-  paymentMethod: 'cash' | 'card';
+  paymentMethod: "cash" | "card";
   createdAt: string;
 }
 
