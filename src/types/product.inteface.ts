@@ -5,7 +5,10 @@ export type BackendProduct = {
   price: string;
   discountPrice?: string;
   category: string;
-  sizes: Record<string, { size: string; price: string; discountPrice?: string }>;
+  sizes: Record<
+    string,
+    { size: string; price: string; discountPrice?: string }
+  >;
   additives: { name: string; price: string; discountPrice?: string }[];
 };
 
