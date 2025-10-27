@@ -148,13 +148,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const cartRegBtn = create<HTMLDivElement>("div", ["registerbtn", "confirm-btn"], cartButtonsWrap);
       cartRegBtn.innerText = "Register";
       cartRegBtn.addEventListener("click", () => {
-        window.location.href = "/register";
+        window.location.href = "/register.html";
       });
 
       const cartSignBtn = create<HTMLDivElement>("div", ["signin", "confirm-btn"], cartButtonsWrap);
       cartSignBtn.innerText = "Sign In";
       cartSignBtn.addEventListener("click", () => {
-        window.location.href = "/signin";
+        window.location.href = "/signin.html";
       });
     }
   }

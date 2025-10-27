@@ -141,7 +141,6 @@ async function getProductById(id: number): Promise<MergedProduct | null> {
 
     return mergedProduct;
   } catch (error) {
-    console.error(error);
     showError();
     return null;
   }

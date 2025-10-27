@@ -1,9 +1,10 @@
 {
+   "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" },
     { "source": "/Menu", "destination": "/Menu/index.html" },
     { "source": "/register", "destination": "/register.html" },
     { "source": "/signin", "destination": "/signin.html" },
-    { "source": "/cart", "destination": "/cart.html" }
+    { "source": "/cart", "destination": "/cart.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
