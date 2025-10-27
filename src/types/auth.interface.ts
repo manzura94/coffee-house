@@ -15,3 +15,11 @@ export interface AuthResponse {
     user: User;
   };
 }
+
+ export  interface UserInfo {
+    city?: string;
+    street?: string;
+    houseNumber?: string;
+    paymentMethod?: string;
+  }
+

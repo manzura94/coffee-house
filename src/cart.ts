@@ -1,20 +1,18 @@
 import "./styles/style.scss";
+import { UserInfo } from "./types/auth.interface";
+import { CartItem } from "./types/cart.interface";
 
 document.addEventListener("DOMContentLoaded", () => {
   const shoppingCart = document.querySelector<HTMLElement>(".shopping-cart")!;
   const cartWrapper = document.querySelector<HTMLElement>(".cart__wrapper")!;
   const cartItemsNum = document.querySelector<HTMLElement>(".cart-items")!;
 
-  if (!shoppingCart || !cartWrapper || !cartItemsNum) {
-    console.error("One or more required DOM elements not found:", {
-      shoppingCart: !!shoppingCart,
-      cartWrapper: !!cartWrapper,
-      cartItemsNum: !!cartItemsNum,
-    });
-    return;
-  }
 
-  function parseJSON<T>(key: string, fallback: T) {
+
+
+
+
+  function parseJSON<T>(key: string, fallback: T): T {
     try {
       const raw = localStorage.getItem(key);
       return raw ? (JSON.parse(raw) as T) : fallback;
@@ -24,8 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const userInfo = parseJSON<Record<string, any> | null>("user", null);
+  const userInfo = parseJSON<UserInfo | null>("user", null);
   const token = localStorage.getItem("token");
+
   function isLoggedIn(): boolean {
     return Boolean(token);
   }
@@ -34,17 +33,23 @@ document.addEventListener("DOMContentLoaded", () => {
     tagname: keyof HTMLElementTagNameMap,
     classname: string | string[],
     parent: HTMLElement,
-  ) {
+  ): T {
     const tag = document.createElement(tagname) as T;
-    Array.isArray(classname) ? tag.classList.add(...classname) : tag.classList.add(classname);
-    return parent.appendChild(tag);
+    if (Array.isArray(classname)) {
+      tag.classList.add(...classname);
+    } else {
+      tag.classList.add(classname);
+    }
+    parent.appendChild(tag);
+    return tag;
   }
 
-  function getCart(): any[] {
-    return parseJSON<any[]>("cart", []);
+  function getCart(): CartItem[] {
+    return parseJSON<CartItem[]>("cart", []);
   }
 
-  function updateShoppingCartVisibility() {
+
+  function updateShoppingCartVisibility(): void {
     const items = getCart();
     if (isLoggedIn() || items.length > 0) {
       shoppingCart.classList.remove("hidden");
@@ -55,14 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function updateCartCount() {
+  function updateCartCount(): void {
     const cart = getCart();
     cartItemsNum.innerText = cart.length > 0 ? String(cart.length) : "";
   }
 
-  function displayCarts() {
-    cartWrapper.innerHTML = "";
 
+  function displayCarts(): void {
+    cartWrapper.innerHTML = "";
     const haveItems = getCart();
     const cartWrap = create<HTMLDivElement>("div", "cart__wrap", cartWrapper);
 
@@ -78,24 +83,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const cartLeftIcon = create<HTMLDivElement>("div", "cart__items-deleteicon", cartLeft);
         cartLeftIcon.setAttribute("data-id", String(element.id));
+
         const cartLeftIconImg = create<HTMLImageElement>("img", "delete-image", cartLeftIcon);
         cartLeftIconImg.src = "/images/icons/trash.svg";
         cartLeftIconImg.alt = "delete";
 
         const cartLeftImgWrap = create<HTMLDivElement>("div", "cart__left-image", cartLeft);
         const cartLeftImg = create<HTMLImageElement>("img", "cart__left-img", cartLeftImgWrap);
-        cartLeftImg.src = element.imageUrl || "";
-        cartLeftImg.alt = element.name || "product";
+        cartLeftImg.src = element.imageUrl;
+        cartLeftImg.alt = element.name;
 
         const cartLeftInfo = create<HTMLDivElement>("div", "cart__left-info", cartLeft);
         const cartTitle = create<HTMLHeadingElement>("h6", "cart__info-title", cartLeftInfo);
-        cartTitle.innerText = element.name || "Untitled";
+        cartTitle.innerText = element.name;
 
         const cartDesc = create<HTMLParagraphElement>("p", "cart__info-description", cartLeftInfo);
         const parts: string[] = [];
-        if (element.size && element.size.name) parts.push(element.size.name);
+        if (element.size?.name) parts.push(element.size.name);
         if (Array.isArray(element.additives) && element.additives.length) {
-          parts.push(...element.additives.map((a: any) => a.name));
+          parts.push(...element.additives.map((a) => a.name));
         }
         cartDesc.innerText = parts.join(", ");
 
@@ -107,8 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartInfoWrap = create<HTMLDivElement>("div", "cart__info-wrap", cartWrap);
     const total = haveItems.reduce((acc, item) => acc + Number(item.totalPrice ?? 0), 0);
     const totalPriceWrap = create<HTMLDivElement>("div", "totalprice-wrap", cartInfoWrap);
+
     const totalTitle = create<HTMLParagraphElement>("p", "totalprice-title", totalPriceWrap);
     totalTitle.innerText = "Total:";
+
     const totalPrice = create<HTMLDivElement>("div", "totalprice", totalPriceWrap);
     totalPrice.innerText = total > 0 ? `$${total.toFixed(2)}` : "$0.00";
 
@@ -116,12 +124,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const addressWrap = create<HTMLDivElement>("div", "address-cont", cartInfoWrap);
       const addressText = create<HTMLParagraphElement>("p", "address-text", addressWrap);
       addressText.innerText = "Address:";
+
       const addressInfo = create<HTMLParagraphElement>("p", "address-info", addressWrap);
       addressInfo.innerText = `${userInfo.city ?? ""} ${userInfo.street ?? ""} ${userInfo.houseNumber ?? ""}`.trim();
 
       const payInfoWrap = create<HTMLDivElement>("div", "payment-wrap", cartInfoWrap);
       const paymentText = create<HTMLParagraphElement>("p", "address-text", payInfoWrap);
       paymentText.innerText = "Pay by:";
+
       const paymentInfo = create<HTMLParagraphElement>("p", "address-info", payInfoWrap);
       paymentInfo.innerText = `${userInfo.paymentMethod ?? "—"}`;
     }
@@ -137,20 +147,20 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (!isLoggedIn()) {
       const cartRegBtn = create<HTMLDivElement>("div", ["registerbtn", "confirm-btn"], cartButtonsWrap);
       cartRegBtn.innerText = "Register";
-       cartRegBtn.addEventListener("click", () => {
-    window.location.href = "/register"; 
-  });
+      cartRegBtn.addEventListener("click", () => {
+        window.location.href = "/register";
+      });
 
       const cartSignBtn = create<HTMLDivElement>("div", ["signin", "confirm-btn"], cartButtonsWrap);
       cartSignBtn.innerText = "Sign In";
-
-       cartSignBtn.addEventListener("click", () => {
-    window.location.href = "/signin"; 
-  });
+      cartSignBtn.addEventListener("click", () => {
+        window.location.href = "/signin";
+      });
     }
   }
 
-  cartWrapper.addEventListener("click", (event) => {
+
+  cartWrapper.addEventListener("click", (event: MouseEvent) => {
     const target = event.target as HTMLElement;
     const deleteIcon = target.closest(".cart__items-deleteicon") as HTMLElement | null;
     if (!deleteIcon) return;
@@ -166,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
     updateShoppingCartVisibility();
   });
+
 
   updateShoppingCartVisibility();
   displayCarts();
