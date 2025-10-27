@@ -42,12 +42,23 @@ function showError() {
   error.innerText = "⚠ Failed to load menu. Try again later.";
 }
 
+
+const isUserLogged = isLoggedIn();
 function isLoggedIn(): boolean {
   return !!localStorage.getItem("token");
 }
 
-const isUserLogged = isLoggedIn();
-shoppingCart.classList.toggle("hidden", !isUserLogged);
+
+const cartItems = document.querySelector('.cart-items')!;
+const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
+
+if(isUserLogged || haveItems.length){
+  shoppingCart.classList.remove('hidden');
+   cartItems.innerHTML = `${haveItems.length}`
+}else{
+  shoppingCart.classList.add('hidden')
+
+}
 
 
 
@@ -93,7 +104,6 @@ let displayMenu = async function (category: string, showBtn = false) {
   menuWrapper.innerHTML = "";
 
   const filtered = allProducts.filter((p) => p.category === category);
-  console.log(filtered);
 
   if (display < 768 && !showBtn) {
     filtered.length <= 4

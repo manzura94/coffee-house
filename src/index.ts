@@ -27,9 +27,9 @@ const sliderScrollbar = document.querySelector(
 ) as HTMLElement;
 
 const placeholders = [
-  "./images/coffee-slider-1.png",
-  "./images/coffee-slider-2.png",
-  "./images/coffee-slider-3.png",
+  "/images/coffee-slider-1.png",
+  "/images/coffee-slider-2.png",
+  "/images/coffee-slider-3.png",
 ];
 
 let timer: number | null = null;
@@ -80,8 +80,19 @@ function isLoggedIn() {
   return !!localStorage.getItem("token");
 }
 
+const cartItems = document.querySelector('.cart-items')!;
 const isUserLogged = isLoggedIn();
-shoppingCart.classList.toggle("hidden", !isUserLogged);
+const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
+
+if(isUserLogged || haveItems.length){
+  shoppingCart.classList.remove('hidden');
+   cartItems.innerHTML = `${haveItems.length}`
+}else{
+  shoppingCart.classList.add('hidden')
+
+}
+
+
 
 const updateScrollThumbPosition = () => {
   const scrollPosition = imageList.scrollLeft;
