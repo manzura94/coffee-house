@@ -12,6 +12,24 @@
     align-items: center;
   }
 
+  .cart-empty{
+    text-align: center;
+    width: 100%;
+    margin: 30px;
+  }
+
+  .confirm-btn{
+     padding: 10px 53px;
+      background: none;
+      border-radius: 100px;
+      border: 1px solid #665f55;
+      font-size: 16px;
+      font-weight: 600;
+      color: #403f3d;
+      margin-top: 16px;
+      cursor: pointer;
+  }
+
   .address-cont {
     display: flex;
     justify-content: space-between;

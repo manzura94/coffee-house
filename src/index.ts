@@ -84,9 +84,9 @@ const cartItems = document.querySelector(".cart-items")!;
 const isUserLogged = isLoggedIn();
 const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
 
-if (isUserLogged || haveItems.length) {
+if (isUserLogged || haveItems.length > 0) {
   shoppingCart.classList.remove("hidden");
-  cartItems.innerHTML = `${haveItems.length}`;
+  cartItems.innerHTML = haveItems.length > 0 ? `${haveItems.length}`: '';
 } else {
   shoppingCart.classList.add("hidden");
 }

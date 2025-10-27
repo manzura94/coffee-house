@@ -50,6 +50,7 @@ function isLoggedIn(): boolean {
 const isUserLogged = isLoggedIn();
 const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
 
+
 if (isUserLogged || haveItems.length) {
   shoppingCart.classList.remove("hidden");
   cartItems.innerHTML = `${haveItems.length}`;
@@ -71,8 +72,8 @@ async function getAllProducts(): Promise<MergedProduct[]> {
   const backendData: BackendProduct[] = backendJson.data;
   const menuData: MenuProduct[] = await menuRes.json();
 
-  const allProducts = backendData.map((product) => {
-    const menuItem = menuData.find((item) => item.id === product.id);
+  const allProducts = backendData?.map((product) => {
+    const menuItem = menuData?.find((item) => item.id === product.id);
     return {
       ...product,
       imageUrl: menuItem?.image ?? null,
@@ -98,7 +99,7 @@ let displayMenu = async function (category: string, showBtn = false) {
   typeMenu = category;
   menuWrapper.innerHTML = "";
 
-  const filtered = allProducts.filter((p) => p.category === category);
+  const filtered = allProducts?.filter((p) => p.category === category);
 
   if (display < 768 && !showBtn) {
     filtered.length <= 4
@@ -211,7 +212,6 @@ function attachTooltip(el: HTMLElement, text: string) {
 }
 
 function showModal(item: HTMLCollectionOf<Element>, data: MergedProduct[]) {
-  console.log(data, "itemmm");
 
   for (let i = 0; i < item.length; i++) {
     let element = item[i];
