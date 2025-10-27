@@ -43,22 +43,26 @@ function showError() {
 }
 
 
-const isUserLogged = isLoggedIn();
+const cartItems = document.querySelector('.cart-items') as HTMLElement;
+
 function isLoggedIn(): boolean {
   return !!localStorage.getItem("token");
 }
 
+function renderCartState(): void {
+  const isUserLogged = isLoggedIn();
+  const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
 
-const cartItems = document.querySelector('.cart-items')!;
-const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
-
-if(isUserLogged || haveItems.length){
-  shoppingCart.classList.remove('hidden');
-   cartItems.innerHTML = `${haveItems.length}`
-}else{
-  shoppingCart.classList.add('hidden')
-
+  if (isUserLogged || haveItems.length > 0) {
+    shoppingCart.classList.remove('hidden');
+    cartItems.innerHTML = `${haveItems.length}`;
+  } else {
+    shoppingCart.classList.add('hidden');
+  }
 }
+
+document.addEventListener("DOMContentLoaded", renderCartState);
+
 
 
 
@@ -395,7 +399,7 @@ attachTooltip(sizeButton, tooltipText);
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
           const selectedSizeBtn = document.querySelector(".size_button.active") as HTMLElement;
-            const selectedSizeName = selectedSizeBtn.querySelector(".menu__buttons-icon")!.textContent!.trim();
+            const selectedSizeName = selectedSizeBtn.querySelector(".menu__buttons-text")!.textContent!.trim();
   const selectedSizePrice = Number(selectedSizeBtn.getAttribute("data-price"));
   const activeAdditives = [...document.querySelectorAll(".additives.active")];
 const selectedAdditives = activeAdditives.map((btn: any) => {

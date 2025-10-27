@@ -34,7 +34,7 @@ if(isUserLogged || haveItems.length){
 
 haveItems.map((element)=>{
    const cartWrap = create<HTMLElement>('div', 'cart__wrap', cartWrapper);
-   const cartItemsWrap = create('div', 'cart__items-wrap', cartWrap);
+   const cartItemsWrap = create('div', 'cart__items', cartWrap);
    const cartInfoWrap = create('div', 'cart__info-wrap', cartWrap);
    const cartButtonsWrap = create('div', 'cart__buttons-wrap', cartWrap);
    const cartItem = create('div', 'cart__item', cartItemsWrap);
@@ -48,5 +48,19 @@ haveItems.map((element)=>{
    cartLeftImg.src = `${element.imageUrl}`;
    const cartLeftInfo = create('div', 'cart__left-info', cartLeft)
    const cartTitle = create('h6', 'cart__title', cartLeftInfo);
-   cartTitle.innerText = `${element.name}`
+   cartTitle.innerText = `${element.name}`;
+   const cartDesc = create('p', 'cart__description', cartLeftInfo);
+   console.log(element);
+   
+   cartDesc.innerText = element.size.name
+
+   if(element.additives.length){
+    element.additives.map(item=>{
+
+        cartDesc.innerText +=  `, ${item.name}`
+    })
+   };
+
+   const cartPrice = create('p', 'cart__price', cartRight);
+   cartPrice.innerText = `$${element.totalPrice}`
 })
