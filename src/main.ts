@@ -1,4 +1,3 @@
-
 import "./styles/style.scss";
 import {
   BackendProduct,
@@ -42,29 +41,21 @@ function showError() {
   error.innerText = "⚠ Failed to load menu. Try again later.";
 }
 
-
-const cartItems = document.querySelector('.cart-items') as HTMLElement;
+const cartItems = document.querySelector(".cart-items") as HTMLElement;
 
 function isLoggedIn(): boolean {
   return !!localStorage.getItem("token");
 }
 
-function renderCartState(): void {
-  const isUserLogged = isLoggedIn();
-  const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
+const isUserLogged = isLoggedIn();
+const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (isUserLogged || haveItems.length > 0) {
-    shoppingCart.classList.remove('hidden');
-    cartItems.innerHTML = `${haveItems.length}`;
-  } else {
-    shoppingCart.classList.add('hidden');
-  }
+if (isUserLogged || haveItems.length) {
+  shoppingCart.classList.remove("hidden");
+  cartItems.innerHTML = `${haveItems.length}`;
+} else {
+  shoppingCart.classList.add("hidden");
 }
-
-document.addEventListener("DOMContentLoaded", renderCartState);
-
-
-
 
 async function getAllProducts(): Promise<MergedProduct[]> {
   const [backendRes, menuRes] = await Promise.all([
@@ -103,7 +94,7 @@ window.addEventListener("resize", function () {
 let displayMenu = async function (category: string, showBtn = false) {
   showLoader();
   const allProducts = await getAllProducts();
-   if(!allProducts) showError();
+  if (!allProducts) showError();
   typeMenu = category;
   menuWrapper.innerHTML = "";
 
@@ -199,7 +190,7 @@ async function getProductById(id: number): Promise<MergedProduct | null> {
 function getPriceForUser(price: string, discountPrice?: string): string {
   const isLoggedUser = isLoggedIn();
   return isLoggedUser && discountPrice ? discountPrice : price;
-};
+}
 
 function attachTooltip(el: HTMLElement, text: string) {
   const tooltip = document.createElement("div");
@@ -219,7 +210,6 @@ function attachTooltip(el: HTMLElement, text: string) {
   });
 }
 
-
 function showModal(item: HTMLCollectionOf<Element>, data: MergedProduct[]) {
   console.log(data, "itemmm");
 
@@ -234,7 +224,7 @@ function showModal(item: HTMLCollectionOf<Element>, data: MergedProduct[]) {
       let modalWrap = create("div", "modal__wrapper", modal);
       let modalImgSide = create("div", "modal__image", modalWrap);
       let modalImgWrap = create("div", "modal__image-wrap", modalImgSide);
-    
+
       let modalImg = create<HTMLImageElement>(
         "img",
         "modal-image",
@@ -243,11 +233,14 @@ function showModal(item: HTMLCollectionOf<Element>, data: MergedProduct[]) {
       modalImg.src = product?.imageUrl ?? "";
 
       let modalInfo = create("div", "modal__info", modalWrap);
-        let closeBtn = create("div", 'modal__wrapper__closebtn', modalWrap );
-      let closeBtnImg = create<HTMLImageElement>('img', 'closebtn-image', closeBtn);
-      closeBtnImg.src = '/images/icons/button-close.svg';
+      let closeBtn = create("div", "modal__wrapper__closebtn", modalWrap);
+      let closeBtnImg = create<HTMLImageElement>(
+        "img",
+        "closebtn-image",
+        closeBtn,
+      );
+      closeBtnImg.src = "/images/icons/button-close.svg";
 
-     
       let modalTextWrap = create("div", "modal__textwrap", modalInfo);
       let title = create("h4", "modal__title", modalTextWrap);
       title.innerText = product!.name;
@@ -272,14 +265,15 @@ function showModal(item: HTMLCollectionOf<Element>, data: MergedProduct[]) {
       let sizeButtonText = create("span", "menu__buttons-text", sizeButton);
       sizeButtonText.innerText = product.sizes.s.size;
 
-const original = sizeData.price;
-const discounted = sizeData.discountPrice;
+      const original = sizeData.price;
+      const discounted = sizeData.discountPrice;
 
-const tooltipText = isLoggedIn() && discounted
-  ? `$${discounted} <s>$${original}</s>`
-  : `$${original}`;
+      const tooltipText =
+        isLoggedIn() && discounted
+          ? `$${discounted} <s>$${original}</s>`
+          : `$${original}`;
 
-attachTooltip(sizeButton, tooltipText);
+      attachTooltip(sizeButton, tooltipText);
 
       let sizeButton1 = create(
         "button",
@@ -396,77 +390,90 @@ attachTooltip(sizeButton, tooltipText);
       let addToCart = create("button", "modal__closebtn", modalInfo);
       addToCart.innerText = "Add to cart";
       addToCart.addEventListener("click", function () {
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-          const selectedSizeBtn = document.querySelector(".size_button.active") as HTMLElement;
-            const selectedSizeName = selectedSizeBtn.querySelector(".menu__buttons-text")!.textContent!.trim();
-  const selectedSizePrice = Number(selectedSizeBtn.getAttribute("data-price"));
-  const activeAdditives = [...document.querySelectorAll(".additives.active")];
-const selectedAdditives = activeAdditives.map((btn: any) => {
-    return {
-      name: btn.querySelector(".menu__buttons-text").textContent.trim(),
-      price: Number(btn.getAttribute("data-price"))
-    };
-  });
-    const totalAdditivesPrice = selectedAdditives.reduce((sum, a) => sum + a.price, 0);
-  const totalPrice = (selectedSizePrice + totalAdditivesPrice).toFixed(2);
+        const selectedSizeBtn = document.querySelector(
+          ".size_button.active",
+        ) as HTMLElement;
+        const selectedSizeName = selectedSizeBtn
+          .querySelector(".menu__buttons-text")!
+          .textContent!.trim();
+        const selectedSizePrice = Number(
+          selectedSizeBtn.getAttribute("data-price"),
+        );
+        const activeAdditives = [
+          ...document.querySelectorAll(".additives.active"),
+        ];
+        const selectedAdditives = activeAdditives.map((btn: any) => {
+          return {
+            name: btn.querySelector(".menu__buttons-text").textContent.trim(),
+            price: Number(btn.getAttribute("data-price")),
+          };
+        });
+        const totalAdditivesPrice = selectedAdditives.reduce(
+          (sum, a) => sum + a.price,
+          0,
+        );
+        const totalPrice = (selectedSizePrice + totalAdditivesPrice).toFixed(2);
 
-  const isDiscountedUser = isLoggedIn();
-    const newItem = {
-    id: product!.id,
-    name: product!.name,
-    imageUrl: product!.imageUrl,
-    size: { name: selectedSizeName, price: selectedSizePrice },
-    additives: selectedAdditives,
-    totalPrice: Number(totalPrice),
-    quantity: 1,
-    isDiscounted: isDiscountedUser
-  };
-  const existingIndex = cart.findIndex((item: any) =>
-    item.id === newItem.id &&
-    item.size.name === newItem.size.name &&
-    JSON.stringify(item.additives) === JSON.stringify(newItem.additives)
-  );
+        const isDiscountedUser = isLoggedIn();
+        const newItem = {
+          id: product!.id,
+          name: product!.name,
+          imageUrl: product!.imageUrl,
+          size: { name: selectedSizeName, price: selectedSizePrice },
+          additives: selectedAdditives,
+          totalPrice: Number(totalPrice),
+          quantity: 1,
+          isDiscounted: isDiscountedUser,
+        };
+        const existingIndex = cart.findIndex(
+          (item: any) =>
+            item.id === newItem.id &&
+            item.size.name === newItem.size.name &&
+            JSON.stringify(item.additives) ===
+              JSON.stringify(newItem.additives),
+        );
 
-  if (existingIndex !== -1) {
-    cart[existingIndex].quantity += 1;
-    cart[existingIndex].totalPrice = Number(
-      (cart[existingIndex].totalPrice + newItem.totalPrice).toFixed(2)
-    );
-  } else {
-    cart.push(newItem);
-  }
-    localStorage.setItem("cart", JSON.stringify(cart));
-      document.querySelector(".body")!.classList.remove("no-scroll");
-  modal.classList.add("modal__close");
-
-      })
+        if (existingIndex !== -1) {
+          cart[existingIndex].quantity += 1;
+          cart[existingIndex].totalPrice = Number(
+            (cart[existingIndex].totalPrice + newItem.totalPrice).toFixed(2),
+          );
+        } else {
+          cart.push(newItem);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        document.querySelector(".body")!.classList.remove("no-scroll");
+        modal.classList.add("modal__close");
+      });
 
       document.querySelector(".body")!.classList.add("no-scroll");
 
-     let sizeButtonsList = [...document.getElementsByClassName("size_button")];
-let additiveButtonsList = [...document.getElementsByClassName("additives")];
-pricing.innerText = basePrice.toFixed(2);
+      let sizeButtonsList = [...document.getElementsByClassName("size_button")];
+      let additiveButtonsList = [
+        ...document.getElementsByClassName("additives"),
+      ];
+      pricing.innerText = basePrice.toFixed(2);
 
-sizeButtonsList.forEach((button) => {
-  button.addEventListener("click", function () {
+      sizeButtonsList.forEach((button) => {
+        button.addEventListener("click", function () {
+          sizeButtonsList.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
 
-    sizeButtonsList.forEach((btn) => btn.classList.remove("active"));
-    button.classList.add("active");
+          additiveButtonsList.forEach((addBtn) =>
+            addBtn.classList.remove("active"),
+          );
 
-    additiveButtonsList.forEach((addBtn) => addBtn.classList.remove("active"));
-
-    basePrice = Number(button.getAttribute("data-price")) || 0;
-    pricing.innerText = basePrice.toFixed(2);
-  });
-});
-
+          basePrice = Number(button.getAttribute("data-price")) || 0;
+          pricing.innerText = basePrice.toFixed(2);
+        });
+      });
 
       closeModal(closeBtn, modal, modalWrap);
     });
   }
 }
-
 
 teaBtn.addEventListener("click", function () {
   showMore.classList.remove("modal__close");
@@ -498,7 +505,11 @@ dessertBtn.addEventListener("click", function () {
   coffeeBtn.classList.remove("active");
 });
 
-let closeModal = (button: HTMLElement, modal: HTMLElement, modalWrap: HTMLElement) => {
+let closeModal = (
+  button: HTMLElement,
+  modal: HTMLElement,
+  modalWrap: HTMLElement,
+) => {
   modalWrap.addEventListener("click", function (e) {
     e.stopPropagation();
   });
@@ -514,7 +525,7 @@ let closeModal = (button: HTMLElement, modal: HTMLElement, modalWrap: HTMLElemen
     modal.classList.add("modal__close");
   });
 
-   document.addEventListener("keydown", function escHandler(e) {
+  document.addEventListener("keydown", function escHandler(e) {
     if (e.key === "Escape") {
       document.querySelector(".body")!.classList.remove("no-scroll");
       modal.classList.add("modal__close");

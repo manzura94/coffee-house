@@ -80,19 +80,16 @@ function isLoggedIn() {
   return !!localStorage.getItem("token");
 }
 
-const cartItems = document.querySelector('.cart-items')!;
+const cartItems = document.querySelector(".cart-items")!;
 const isUserLogged = isLoggedIn();
 const haveItems = JSON.parse(localStorage.getItem("cart") || "[]");
 
-if(isUserLogged || haveItems.length){
-  shoppingCart.classList.remove('hidden');
-   cartItems.innerHTML = `${haveItems.length}`
-}else{
-  shoppingCart.classList.add('hidden')
-
+if (isUserLogged || haveItems.length) {
+  shoppingCart.classList.remove("hidden");
+  cartItems.innerHTML = `${haveItems.length}`;
+} else {
+  shoppingCart.classList.add("hidden");
 }
-
-
 
 const updateScrollThumbPosition = () => {
   const scrollPosition = imageList.scrollLeft;

@@ -1,4 +1,4 @@
-    .tooltip {
+.tooltip {
   position: fixed;
   background: #000 !;
   color: #fff;
@@ -29,10 +29,6 @@
   align-items: center;
   justify-content: center;
   z-index: 10;
-
- 
-
- 
 
   &__close {
     display: none;
@@ -75,14 +71,12 @@
     gap: 20px;
     z-index: 1000;
 
-       &__closebtn{
-    position: absolute;
-    cursor: pointer;
-    top: -5;
-    right: -2;
-  }
-
-   
+    &__closebtn {
+      position: absolute;
+      cursor: pointer;
+      top: -5;
+      right: -2;
+    }
   }
 
   &__image {
@@ -108,10 +102,6 @@
     flex-direction: column;
     gap: 20px;
     color: $text-dark;
-
-
-
-
   }
 
   &__title {
