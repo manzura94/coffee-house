@@ -1,4 +1,4 @@
-import { ICoffee } from "./types/coffee.interface";
+
 import "./styles/style.scss";
 import {
   BackendProduct,
@@ -54,7 +54,7 @@ shoppingCart.classList.toggle("hidden", !isUserLogged);
 async function getAllProducts(): Promise<MergedProduct[]> {
   const [backendRes, menuRes] = await Promise.all([
     fetch(FAVORITES_ENDPOINT),
-    fetch("../Menu/data/menu.json"),
+    fetch("/data/menu.json"),
   ]);
 
   if (!backendRes.ok || !menuRes.ok) {
@@ -88,7 +88,7 @@ window.addEventListener("resize", function () {
 let displayMenu = async function (category: string, showBtn = false) {
   showLoader();
   const allProducts = await getAllProducts();
-
+   if(!allProducts) showError();
   typeMenu = category;
   menuWrapper.innerHTML = "";
 
