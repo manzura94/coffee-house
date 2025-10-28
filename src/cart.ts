@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
 
 
 
@@ -141,8 +142,75 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isLoggedIn() && haveItems.length > 0) {
       const cartConfirmBtn = create<HTMLDivElement>("div", ["confirm", "confirm-btn"], cartButtonsWrap);
       cartConfirmBtn.innerText = "Confirm";
-      cartConfirmBtn.addEventListener("click", () => {
-        console.log("Confirm clicked");
+      cartConfirmBtn.addEventListener("click", async () => {
+        const cart = getCart();
+        if (cart.length === 0) return;
+
+         const items = cart.map((item) => ({
+    productId: item.id,
+    size: item.size?.name ?? "",
+    additives: Array.isArray(item.additives)
+      ? item.additives.map((a) => a.name)
+      : [],
+    quantity: item.quantity ?? 1,
+  }));
+
+  const totalPrice = cart.reduce(
+    (acc, item) => acc + Number(item.totalPrice ?? 0),
+    0
+  );
+
+  const body = {
+    items,
+    totalPrice: Number(totalPrice.toFixed(2)),
+  };
+         const loader = document.createElement("div");
+  loader.classList.add("loader-overlay");
+  loader.innerHTML = `
+    <div class="loader"></div>
+  `;
+
+  document.body.appendChild(loader);
+
+  try {
+       await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const response = await fetch(`${BASE_URL}/orders/confirm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Order failed");
+    }
+
+    const data = await response.json();
+    console.log("Order placed:", data);
+
+    loader.remove();
+
+    localStorage.removeItem("cart");
+    updateCartCount();
+    updateShoppingCartVisibility();
+    displayCarts();
+
+    showNotification(
+      "Thank you for your order! Our manager will contact you shortly.",
+      "success"
+    );
+
+    
+  } catch (error) {
+     loader.remove();
+    showNotification("Something went wrong. Please, try again.", "error");
+  }
+        
+
+
       });
     } else if (!isLoggedIn()) {
       const cartRegBtn = create<HTMLDivElement>("div", ["registerbtn", "confirm-btn"], cartButtonsWrap);
@@ -176,6 +244,26 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCount();
     updateShoppingCartVisibility();
   });
+
+  function showNotification(message: string, type: "success" | "error"): void {
+  const existing = document.querySelector(".notification");
+  if (existing) existing.remove();
+
+  const notification = document.createElement("div");
+  notification.classList.add("notification", type);
+  notification.innerText = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 50);
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => notification.remove(), 300);
+  }, 4000);
+}
+
 
 
   updateShoppingCartVisibility();

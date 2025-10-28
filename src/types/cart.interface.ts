@@ -11,6 +11,7 @@
     size?: { name: string };
     additives?: Additive[];
     totalPrice?: number;
+     quantity: number; 
   }
 
   export interface CartItems {
