@@ -1,5 +1,5 @@
 import "./styles/style.scss";
-import { AuthResponse } from "./types/auth.interface";
+
 
 const form = document.querySelector<HTMLFormElement>(".register__form")!;
 const inputs = document.querySelectorAll<HTMLInputElement | HTMLSelectElement>(
@@ -20,6 +20,7 @@ const streetSelect = document.querySelector<HTMLSelectElement>("#street")!;
 const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
 
 registerBtn.disabled = true;
+
 
 function showError(
   input: HTMLInputElement | HTMLSelectElement,

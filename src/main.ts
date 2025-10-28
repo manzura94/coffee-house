@@ -490,14 +490,14 @@ function showModal(
         "modal__price-price",
         priceNum,
       );
+      const pricingOld = create<HTMLSpanElement>(
+        "span",
+        "modal__price-old",
+        priceNum,
+      );
       const pricingDiscount = create<HTMLSpanElement>(
         "span",
         "modal__price-discount",
-        priceNum,
-      );
-      const pricingOld = create<HTMLSpanElement>(
-        "s",
-        "modal__price-old",
         priceNum,
       );
 
@@ -612,7 +612,7 @@ const sizeBase = selectedSize ? Number(selectedSize.getAttribute("data-price")) 
     return { name, price };
   });
 
-  const totalAdditivesPrice = selectedAdditives.reduce((sum, a) => sum + a.price, 0);
+
   const finalTotalPrice = (isLoggedIn() && lastTotals.discounted < lastTotals.actual) ? lastTotals.discounted : lastTotals.actual;
 
   const isDiscountedUser = isLoggedIn();
