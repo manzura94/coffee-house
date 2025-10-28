@@ -109,7 +109,8 @@ async function getAllProducts(): Promise<MergedProduct[]> {
         };
       },
     );
-
+  console.log(allProducts);
+  
     return allProducts;
   } catch (e) {
     console.error(e);
@@ -247,9 +248,6 @@ function renderMenuItem(element: MergedProduct): void {
   }
 }
 
-// function getPriceForUser(price: string, discountPrice?: string): string {
-//   return isLoggedIn() && discountPrice ? discountPrice : price;
-// }
 
 function attachTooltip(el: HTMLElement, text: string): void {
   const tooltip = document.createElement("div");
