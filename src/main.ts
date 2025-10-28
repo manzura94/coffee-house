@@ -109,7 +109,7 @@ async function getAllProducts(): Promise<MergedProduct[]> {
         };
       },
     );
-  console.log(allProducts);
+
   
     return allProducts;
   } catch (e) {
@@ -142,6 +142,7 @@ async function getProductById(id: number): Promise<MergedProduct | null> {
       imageUrl: menuProduct?.image ?? null,
     };
 
+   
     return mergedProduct;
   } catch (error) {
     showError();
@@ -172,6 +173,8 @@ const displayMenu = async function (
   menuWrapper.innerHTML = "";
 
   const filtered = allProducts.filter((p) => p.category === category);
+
+  
 
   if (display < 768 && !showBtn) {
     filtered.length <= 4
@@ -276,6 +279,7 @@ function showModal(
     element.addEventListener("click", async function () {
       const product = await getProductById(Number(element.id));
       if (!product) return showError();
+      
 
       const modal = create<HTMLDivElement>("div", "modal", wrapper);
       const modalWrap = create<HTMLDivElement>("div", "modal__wrapper", modal);
@@ -364,10 +368,7 @@ function showModal(
           sizeButtons,
         );
 
-        btn.setAttribute(
-          "data-price",
-          String(isDiscountedUser && discountPrice ? discountPrice : price),
-        );
+       btn.setAttribute("data-price", String(price));
 
         const icon = create<HTMLSpanElement>("span", "menu__buttons-icon", btn);
         icon.innerText = label;
@@ -379,6 +380,8 @@ function showModal(
             ? `<s>$${price.toFixed(2)}</s> $${discountPrice.toFixed(2)}`
             : `$${price.toFixed(2)}`;
         attachTooltip(btn, tooltipHTML);
+
+         btn.type = "button";
 
         return btn;
       }
@@ -425,10 +428,10 @@ function showModal(
           ["menu-button", "additives"],
           addButtons,
         );
-        btn.setAttribute(
-          "data-price",
-          String(isDiscountedUser && discountPrice ? discountPrice : price),
-        );
+
+        btn.type = "button";
+
+        btn.setAttribute("data-price", String(price));
 
         const icon = create<HTMLSpanElement>("span", "menu__buttons-icon", btn);
         icon.innerText = `${index + 1}`;
@@ -442,14 +445,21 @@ function showModal(
         attachTooltip(btn, tooltipHTML);
 
         btn.addEventListener("click", function () {
-          btn.classList.toggle("active");
-          const value = Number(btn.getAttribute("data-price")) || 0;
-          const current = Number(pricing.innerText);
-          pricing.innerText = (
-            btn.classList.contains("active") ? current + value : current - value
-          ).toFixed(2);
+         
+           btn.classList.toggle("active"); 
+    updateTotal();
+          
         });
       });
+
+      addButtons.addEventListener("click", (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
+  const btn = target.closest("button.additives") as HTMLButtonElement | null;
+  if (!btn) return;
+
+  btn.classList.toggle("active");
+  updateTotal();
+});
 
       const priceWrap = create<HTMLDivElement>(
         "div",
@@ -505,69 +515,64 @@ function showModal(
         Number(sizeButtonsList[0].getAttribute("data-price")) || 0;
       pricing.innerText = basePrice.toFixed(2);
 
+      let lastTotals = { actual: 0, discounted: 0 };
+
     function updateTotal(): void {
+      
   const selectedSize = modal.querySelector<HTMLButtonElement>(".size_button.active");
   const selectedAdditives = modal.querySelectorAll<HTMLButtonElement>(".additives.active");
 
-  // Base prices
-  const sizePrice = selectedSize
-    ? Number(selectedSize.getAttribute("data-price")) || 0
-    : 0;
-  const additivesPrice = Array.from(selectedAdditives).reduce(
-    (sum, btn) => sum + (Number(btn.getAttribute("data-price")) || 0),
-    0
+
+const sizeBase = selectedSize ? Number(selectedSize.getAttribute("data-price")) || 0 : 0;
+  const additivesBase = Array.from(selectedAdditives).reduce(
+    (s, b) => s + (Number(b.getAttribute("data-price")) || 0),
+    0,
   );
+  const actualTotal = sizeBase + additivesBase;
 
-  const totalActual = sizePrice + additivesPrice;
   const isDiscountedUser = isLoggedIn();
-
-
-  let totalDiscounted = totalActual;
-
-  if (isDiscountedUser) {
-    let discountedSize = sizePrice;
-    let discountedAdditives = 0;
-
-
-    if (selectedSize) {
-      const sizeName = selectedSize
-        .querySelector(".menu__buttons-text")
-        ?.textContent?.trim()
-        .toLowerCase() as keyof MergedProduct["sizes"];
-
-      const size = product?.sizes[sizeName];
-      if (size?.discountPrice && size.discountPrice < size.price) {
-        discountedSize = Number(size.discountPrice);
-      }
+  let sizeDiscounted = sizeBase;
+  if (selectedSize) {
+    const sizeName = selectedSize.querySelector(".menu__buttons-text")?.textContent?.trim().toLowerCase() as keyof MergedProduct["sizes"];
+    const sizeObj = product?.sizes[sizeName];
+    if (isDiscountedUser && sizeObj?.discountPrice && Number(sizeObj.discountPrice) < Number(sizeObj.price)) {
+      sizeDiscounted = Number(sizeObj.discountPrice);
     }
+  };
 
+    const additivesDiscounted = Array.from(selectedAdditives).reduce((sum, btn) => {
+    const name = btn.querySelector(".menu__buttons-text")?.textContent?.trim();
+    const additiveObj = product?.additives.find(a => a.name === name);
+    if (isDiscountedUser && additiveObj?.discountPrice && Number(additiveObj.discountPrice) < Number(additiveObj.price)) {
+      return sum + Number(additiveObj.discountPrice);
+    }
+    return sum + (additiveObj ? Number(additiveObj.price) : Number(btn.getAttribute("data-price") || 0));
+  }, 0);
 
-    discountedAdditives = Array.from(selectedAdditives).reduce((sum, btn) => {
-      const name = btn.querySelector(".menu__buttons-text")?.textContent?.trim();
-      const additive = product?.additives.find((a) => a.name === name);
-      if (additive?.discountPrice && additive.discountPrice < additive.price) {
-        return sum + Number(additive.discountPrice);
-      }
-      return sum + (additive ? Number(additive.price) : 0);
-    }, 0);
+  let discountedTotal = sizeDiscounted + additivesDiscounted;
 
-    totalDiscounted = discountedSize + discountedAdditives;
+   if (isDiscountedUser && product?.discountPrice && Number(product.discountPrice) < Number(product.price)) {
+
+    const productDiscountAmount = Number(product.price) - Number(product.discountPrice);
+    discountedTotal = Math.max(0, discountedTotal - productDiscountAmount);
   }
 
-
-  if (isDiscountedUser && totalDiscounted < totalActual) {
+    lastTotals = { actual: Number(actualTotal.toFixed(2)), discounted: Number(discountedTotal.toFixed(2)) };
+ 
+     if (isDiscountedUser && lastTotals.discounted < lastTotals.actual) {
     pricingOld.style.display = "inline";
     pricingDiscount.style.display = "inline";
     pricing.style.display = "none";
 
-    pricingOld.innerText = totalActual.toFixed(2);
-    pricingDiscount.innerText = totalDiscounted.toFixed(2);
+    pricingOld.innerText = lastTotals.actual.toFixed(2);
+    pricingDiscount.innerText = lastTotals.discounted.toFixed(2);
   } else {
     pricingOld.style.display = "none";
     pricingDiscount.style.display = "none";
     pricing.style.display = "inline";
-    pricing.innerText = totalActual.toFixed(2);
+    pricing.innerText = lastTotals.actual.toFixed(2);
   }
+  
 }
 
 
@@ -594,74 +599,62 @@ function showModal(
       );
       addToCart.innerText = "Add to cart";
       addToCart.addEventListener("click", function () {
-        const cart = getCart();
+       const cart = getCart();
 
-        const selectedSizeBtn = modal.querySelector<HTMLButtonElement>(
-          ".size_button.active",
-        )!;
-        const selectedSizeName = selectedSizeBtn
-          .querySelector<HTMLElement>(".menu__buttons-text")!
-          .textContent!.trim();
-        const selectedSizePrice =
-          Number(selectedSizeBtn.getAttribute("data-price")) || 0;
+  const selectedSizeBtn = modal.querySelector<HTMLButtonElement>(".size_button.active")!;
+  const selectedSizeName = selectedSizeBtn.querySelector<HTMLElement>(".menu__buttons-text")!.textContent!.trim();
+  const selectedSizePrice = Number(selectedSizeBtn.getAttribute("data-price")) || 0;
 
-        const activeAdditives = Array.from(
-          modal.querySelectorAll<HTMLButtonElement>(".additives.active"),
-        );
-        const selectedAdditives = activeAdditives.map((btn) => {
-          const name = btn
-            .querySelector<HTMLElement>(".menu__buttons-text")!
-            .textContent!.trim();
-          const price = Number(btn.getAttribute("data-price")) || 0;
-          return { name, price };
-        });
+  const activeAdditives = Array.from(modal.querySelectorAll<HTMLButtonElement>(".additives.active"));
+  const selectedAdditives = activeAdditives.map((btn) => {
+    const name = btn.querySelector<HTMLElement>(".menu__buttons-text")!.textContent!.trim();
+    const price = Number(btn.getAttribute("data-price")) || 0;
+    return { name, price };
+  });
 
-        const totalAdditivesPrice = selectedAdditives.reduce(
-          (sum, a) => sum + a.price,
-          0,
-        );
-        const totalPrice = Number(
-          (selectedSizePrice + totalAdditivesPrice).toFixed(2),
-        );
+  const totalAdditivesPrice = selectedAdditives.reduce((sum, a) => sum + a.price, 0);
+  const finalTotalPrice = (isLoggedIn() && lastTotals.discounted < lastTotals.actual) ? lastTotals.discounted : lastTotals.actual;
 
-        const isDiscountedUser = isLoggedIn();
-        const newItem: CartItems = {
-          id: product.id,
-          name: product.name,
-          imageUrl: product.imageUrl,
-          size: { name: selectedSizeName, price: selectedSizePrice },
-          additives: selectedAdditives,
-          totalPrice,
-          quantity: 1,
-          isDiscounted: isDiscountedUser,
-        };
+  const isDiscountedUser = isLoggedIn();
+  const newItem = {
+    id: product.id,
+    name: product.name,
+    imageUrl: product.imageUrl,
+    size: { name: selectedSizeName, price: selectedSizePrice },
+    additives: selectedAdditives,
+    totalPrice: finalTotalPrice, 
+    quantity: 1,
+    isDiscounted: isDiscountedUser,
 
-        const existingIndex = cart.findIndex(
-          (item) =>
-            item.id === newItem.id &&
-            item.size.name === newItem.size.name &&
-            JSON.stringify(item.additives) ===
-              JSON.stringify(newItem.additives),
-        );
+    actualTotal: lastTotals.actual,
+    discountedTotal: lastTotals.discounted,
+  } as unknown as CartItems; 
 
-        if (existingIndex !== -1) {
-          const updatedItem = { ...cart[existingIndex] };
-          updatedItem.quantity = cart[existingIndex].quantity + 1;
-          updatedItem.totalPrice = Number(
-            (cart[existingIndex].totalPrice + newItem.totalPrice).toFixed(2),
-          );
-          const newCart = [...cart];
-          newCart[existingIndex] = updatedItem;
-          setCart(newCart);
-        } else {
-          setCart([...cart, newItem]);
-        }
+  const existingIndex = cart.findIndex(
+    (item) =>
+      item.id === newItem.id &&
+      item.size.name === newItem.size.name &&
+      JSON.stringify(item.additives) === JSON.stringify(newItem.additives),
+  );
 
-        updateShoppingCartVisibility();
-        updateCartCount();
+  if (existingIndex !== -1) {
+    const updatedItem = { ...cart[existingIndex] };
+    updatedItem.quantity = cart[existingIndex].quantity + 1;
+    updatedItem.totalPrice = Number((cart[existingIndex].totalPrice + newItem.totalPrice).toFixed(2));
+    const newCart = [...cart];
+    newCart[existingIndex] = updatedItem;
+    console.log(newCart);
+    
+    setCart(newCart);
+  } else {
+    setCart([...cart, newItem]);
+  }
 
-        wrapper.classList.remove("no-scroll");
-        modal.classList.add("modal__close");
+  updateShoppingCartVisibility();
+  updateCartCount();
+
+  wrapper.classList.remove("no-scroll");
+  modal.classList.add("modal__close");
       });
 
       closeModal(closeBtn, modal, modalWrap);

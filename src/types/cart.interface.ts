@@ -10,6 +10,7 @@ export interface CartItem {
   additives?: Additive[];
   totalPrice?: number;
   quantity: number;
+  discountedTotal?: number
 }
 
 export interface CartItems {

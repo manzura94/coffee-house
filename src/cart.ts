@@ -65,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cartWrapper.innerHTML = "";
     const haveItems = getCart();
     const cartWrap = create<HTMLDivElement>("div", "cart__wrap", cartWrapper);
+    console.log(haveItems);
+    
 
     if (haveItems.length === 0) {
       const empty = create<HTMLParagraphElement>("p", "cart-empty", cartWrap);
@@ -144,12 +146,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         cartDesc.innerText = parts.join(", ");
 
+
         const cartPrice = create<HTMLParagraphElement>(
           "p",
           "cart__price",
           cartRight,
         );
-        cartPrice.innerText = `$${Number(element.totalPrice ?? 0).toFixed(2)}`;
+
+        const actual = Number( element.totalPrice ?? 0);
+      const discounted = Number(element.discountedTotal ?? actual);
+       if (discounted < actual) {
+        const oldPrice = create<HTMLParagraphElement>("p", ["cart__price", "old-price"], cartPrice);
+        oldPrice.innerText = `$${actual.toFixed(2)}`;
+        const newPrice = create<HTMLParagraphElement>("p", ["cart__price", "new-price"], cartPrice);
+        newPrice.innerText = `$${discounted.toFixed(2)}`;
+      } else {
+        const onlyPrice = create<HTMLParagraphElement>("p", "cart__price", cartPrice);
+        onlyPrice.innerText = `$${actual.toFixed(2)}`;
+      }
       });
     }
 
@@ -158,10 +172,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "cart__info-wrap",
       cartWrap,
     );
-    const total = haveItems.reduce(
-      (acc, item) => acc + Number(item.totalPrice ?? 0),
-      0,
-    );
+    const totalActual = haveItems.reduce((acc, item) => acc + Number(item.totalPrice ?? 0), 0);
+  const totalDiscounted = haveItems.reduce((acc, item) => acc + Number(item.discountedTotal ??  item.totalPrice ?? 0), 0);
     const totalPriceWrap = create<HTMLDivElement>(
       "div",
       "totalprice-wrap",
@@ -180,7 +192,14 @@ document.addEventListener("DOMContentLoaded", () => {
       "totalprice",
       totalPriceWrap,
     );
-    totalPrice.innerText = total > 0 ? `$${total.toFixed(2)}` : "$0.00";
+      if (totalDiscounted < totalActual) {
+    totalPrice.innerHTML = `
+      <span class="old-price">$${totalActual.toFixed(2)}</span>
+      <span class="new-price">$${totalDiscounted.toFixed(2)}</span>
+    `;
+  } else {
+    totalPrice.innerText = `$${totalActual.toFixed(2)}`;
+  }
 
     if (
       isLoggedIn() &&
