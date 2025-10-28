@@ -103,7 +103,7 @@ form.addEventListener("submit", async (e) => {
     login.value = "";
     password.value = "";
     setTimeout(() => {
-      window.location.href = "./Menu/index.html";
+      window.location.href = "./menu.html";
     }, 2000);
   } catch (error) {
     showFormError("Network error. Please try again later.");
