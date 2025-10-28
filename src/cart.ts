@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
           cartRight,
         );
 
-        const actual = Number( element.totalPrice ?? 0);
+        const actual = Number(element.actualTotal ?? element.totalPrice ?? 0);
       const discounted = Number(element.discountedTotal ?? actual);
        if (discounted < actual) {
         const oldPrice = create<HTMLParagraphElement>("p", ["cart__price", "old-price"], cartPrice);
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "cart__info-wrap",
       cartWrap,
     );
-    const totalActual = haveItems.reduce((acc, item) => acc + Number(item.totalPrice ?? 0), 0);
+    const totalActual = haveItems.reduce((acc, item) => acc + Number(item.actualTotal ?? item.totalPrice ?? 0), 0);
   const totalDiscounted = haveItems.reduce((acc, item) => acc + Number(item.discountedTotal ??  item.totalPrice ?? 0), 0);
     const totalPriceWrap = create<HTMLDivElement>(
       "div",

@@ -10,7 +10,8 @@ export interface CartItem {
   additives?: Additive[];
   totalPrice?: number;
   quantity: number;
-  discountedTotal?: number
+  discountedTotal?: number;
+  actualTotal?: number
 }
 
 export interface CartItems {
