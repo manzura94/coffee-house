@@ -8,7 +8,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "./index.html",
-        menu: "./Menu/index.html",
+        menu: "./menu.html",
         register: "./register.html",
         cart: "./cart.html",
         signin: "./signin.html",
