@@ -1,20 +1,18 @@
+export interface Additive {
+  name: string;
+}
 
+export interface CartItem {
+  id: string | number;
+  name: string;
+  imageUrl: string;
+  size?: { name: string };
+  additives?: Additive[];
+  totalPrice?: number;
+  quantity: number;
+}
 
-  export interface Additive {
-    name: string;
-  }
-
-  export interface CartItem {
-    id: string | number;
-    name: string;
-    imageUrl: string;
-    size?: { name: string };
-    additives?: Additive[];
-    totalPrice?: number;
-     quantity: number; 
-  }
-
-  export interface CartItems {
+export interface CartItems {
   id: number;
   name: string;
   imageUrl: string | null;

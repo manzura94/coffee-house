@@ -16,10 +16,9 @@ export interface AuthResponse {
   };
 }
 
- export  interface UserInfo {
-    city?: string;
-    street?: string;
-    houseNumber?: string;
-    paymentMethod?: string;
-  }
-
+export interface UserInfo {
+  city?: string;
+  street?: string;
+  houseNumber?: string;
+  paymentMethod?: string;
+}

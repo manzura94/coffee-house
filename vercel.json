@@ -1,5 +1,5 @@
 {
-   "cleanUrls": true,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/Menu", "destination": "/Menu/index.html" },
     { "source": "/register", "destination": "/register.html" },

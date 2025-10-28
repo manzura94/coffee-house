@@ -11,5 +11,5 @@
     "moduleResolution": "node",
     "sourceMap": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/main.ts"]
 }

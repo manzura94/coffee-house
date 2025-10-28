@@ -7,11 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartWrapper = document.querySelector<HTMLElement>(".cart__wrapper")!;
   const cartItemsNum = document.querySelector<HTMLElement>(".cart-items")!;
 
-
-
-const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
-
-
+  const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
 
   function parseJSON<T>(key: string, fallback: T): T {
     try {
@@ -49,7 +45,6 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
     return parseJSON<CartItem[]>("cart", []);
   }
 
-
   function updateShoppingCartVisibility(): void {
     const items = getCart();
     if (isLoggedIn() || items.length > 0) {
@@ -66,7 +61,6 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
     cartItemsNum.innerText = cart.length > 0 ? String(cart.length) : "";
   }
 
-
   function displayCarts(): void {
     cartWrapper.innerHTML = "";
     const haveItems = getCart();
@@ -77,28 +71,72 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
       empty.innerText = "Your cart is empty.";
     } else {
       haveItems.forEach((element) => {
-        const cartItemsWrap = create<HTMLDivElement>("div", "cart__items", cartWrap);
-        const cartItem = create<HTMLDivElement>("div", "cart__item", cartItemsWrap);
-        const cartLeft = create<HTMLDivElement>("div", "cart__items-left", cartItem);
-        const cartRight = create<HTMLDivElement>("div", "cart__items-right", cartItem);
+        const cartItemsWrap = create<HTMLDivElement>(
+          "div",
+          "cart__items",
+          cartWrap,
+        );
+        const cartItem = create<HTMLDivElement>(
+          "div",
+          "cart__item",
+          cartItemsWrap,
+        );
+        const cartLeft = create<HTMLDivElement>(
+          "div",
+          "cart__items-left",
+          cartItem,
+        );
+        const cartRight = create<HTMLDivElement>(
+          "div",
+          "cart__items-right",
+          cartItem,
+        );
 
-        const cartLeftIcon = create<HTMLDivElement>("div", "cart__items-deleteicon", cartLeft);
+        const cartLeftIcon = create<HTMLDivElement>(
+          "div",
+          "cart__items-deleteicon",
+          cartLeft,
+        );
         cartLeftIcon.setAttribute("data-id", String(element.id));
 
-        const cartLeftIconImg = create<HTMLImageElement>("img", "delete-image", cartLeftIcon);
+        const cartLeftIconImg = create<HTMLImageElement>(
+          "img",
+          "delete-image",
+          cartLeftIcon,
+        );
         cartLeftIconImg.src = "/images/icons/trash.svg";
         cartLeftIconImg.alt = "delete";
 
-        const cartLeftImgWrap = create<HTMLDivElement>("div", "cart__left-image", cartLeft);
-        const cartLeftImg = create<HTMLImageElement>("img", "cart__left-img", cartLeftImgWrap);
+        const cartLeftImgWrap = create<HTMLDivElement>(
+          "div",
+          "cart__left-image",
+          cartLeft,
+        );
+        const cartLeftImg = create<HTMLImageElement>(
+          "img",
+          "cart__left-img",
+          cartLeftImgWrap,
+        );
         cartLeftImg.src = element.imageUrl;
         cartLeftImg.alt = element.name;
 
-        const cartLeftInfo = create<HTMLDivElement>("div", "cart__left-info", cartLeft);
-        const cartTitle = create<HTMLHeadingElement>("h6", "cart__info-title", cartLeftInfo);
+        const cartLeftInfo = create<HTMLDivElement>(
+          "div",
+          "cart__left-info",
+          cartLeft,
+        );
+        const cartTitle = create<HTMLHeadingElement>(
+          "h6",
+          "cart__info-title",
+          cartLeftInfo,
+        );
         cartTitle.innerText = element.name;
 
-        const cartDesc = create<HTMLParagraphElement>("p", "cart__info-description", cartLeftInfo);
+        const cartDesc = create<HTMLParagraphElement>(
+          "p",
+          "cart__info-description",
+          cartLeftInfo,
+        );
         const parts: string[] = [];
         if (element.size?.name) parts.push(element.size.name);
         if (Array.isArray(element.additives) && element.additives.length) {
@@ -106,120 +144,183 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
         }
         cartDesc.innerText = parts.join(", ");
 
-        const cartPrice = create<HTMLParagraphElement>("p", "cart__price", cartRight);
+        const cartPrice = create<HTMLParagraphElement>(
+          "p",
+          "cart__price",
+          cartRight,
+        );
         cartPrice.innerText = `$${Number(element.totalPrice ?? 0).toFixed(2)}`;
       });
     }
 
-    const cartInfoWrap = create<HTMLDivElement>("div", "cart__info-wrap", cartWrap);
-    const total = haveItems.reduce((acc, item) => acc + Number(item.totalPrice ?? 0), 0);
-    const totalPriceWrap = create<HTMLDivElement>("div", "totalprice-wrap", cartInfoWrap);
+    const cartInfoWrap = create<HTMLDivElement>(
+      "div",
+      "cart__info-wrap",
+      cartWrap,
+    );
+    const total = haveItems.reduce(
+      (acc, item) => acc + Number(item.totalPrice ?? 0),
+      0,
+    );
+    const totalPriceWrap = create<HTMLDivElement>(
+      "div",
+      "totalprice-wrap",
+      cartInfoWrap,
+    );
 
-    const totalTitle = create<HTMLParagraphElement>("p", "totalprice-title", totalPriceWrap);
+    const totalTitle = create<HTMLParagraphElement>(
+      "p",
+      "totalprice-title",
+      totalPriceWrap,
+    );
     totalTitle.innerText = "Total:";
 
-    const totalPrice = create<HTMLDivElement>("div", "totalprice", totalPriceWrap);
+    const totalPrice = create<HTMLDivElement>(
+      "div",
+      "totalprice",
+      totalPriceWrap,
+    );
     totalPrice.innerText = total > 0 ? `$${total.toFixed(2)}` : "$0.00";
 
-    if (isLoggedIn() && userInfo && (userInfo.city || userInfo.street || userInfo.houseNumber)) {
-      const addressWrap = create<HTMLDivElement>("div", "address-cont", cartInfoWrap);
-      const addressText = create<HTMLParagraphElement>("p", "address-text", addressWrap);
+    if (
+      isLoggedIn() &&
+      userInfo &&
+      (userInfo.city || userInfo.street || userInfo.houseNumber)
+    ) {
+      const addressWrap = create<HTMLDivElement>(
+        "div",
+        "address-cont",
+        cartInfoWrap,
+      );
+      const addressText = create<HTMLParagraphElement>(
+        "p",
+        "address-text",
+        addressWrap,
+      );
       addressText.innerText = "Address:";
 
-      const addressInfo = create<HTMLParagraphElement>("p", "address-info", addressWrap);
-      addressInfo.innerText = `${userInfo.city ?? ""} ${userInfo.street ?? ""} ${userInfo.houseNumber ?? ""}`.trim();
+      const addressInfo = create<HTMLParagraphElement>(
+        "p",
+        "address-info",
+        addressWrap,
+      );
+      addressInfo.innerText =
+        `${userInfo.city ?? ""} ${userInfo.street ?? ""} ${userInfo.houseNumber ?? ""}`.trim();
 
-      const payInfoWrap = create<HTMLDivElement>("div", "payment-wrap", cartInfoWrap);
-      const paymentText = create<HTMLParagraphElement>("p", "address-text", payInfoWrap);
+      const payInfoWrap = create<HTMLDivElement>(
+        "div",
+        "payment-wrap",
+        cartInfoWrap,
+      );
+      const paymentText = create<HTMLParagraphElement>(
+        "p",
+        "address-text",
+        payInfoWrap,
+      );
       paymentText.innerText = "Pay by:";
 
-      const paymentInfo = create<HTMLParagraphElement>("p", "address-info", payInfoWrap);
+      const paymentInfo = create<HTMLParagraphElement>(
+        "p",
+        "address-info",
+        payInfoWrap,
+      );
       paymentInfo.innerText = `${userInfo.paymentMethod ?? "—"}`;
     }
 
-    const cartButtonsWrap = create<HTMLDivElement>("div", "cart__buttons-wrap", cartWrap);
+    const cartButtonsWrap = create<HTMLDivElement>(
+      "div",
+      "cart__buttons-wrap",
+      cartWrap,
+    );
 
     if (isLoggedIn() && haveItems.length > 0) {
-      const cartConfirmBtn = create<HTMLDivElement>("div", ["confirm", "confirm-btn"], cartButtonsWrap);
+      const cartConfirmBtn = create<HTMLDivElement>(
+        "div",
+        ["confirm", "confirm-btn"],
+        cartButtonsWrap,
+      );
       cartConfirmBtn.innerText = "Confirm";
       cartConfirmBtn.addEventListener("click", async () => {
         const cart = getCart();
         if (cart.length === 0) return;
 
-         const items = cart.map((item) => ({
-    productId: item.id,
-    size: item.size?.name ?? "",
-    additives: Array.isArray(item.additives)
-      ? item.additives.map((a) => a.name)
-      : [],
-    quantity: item.quantity ?? 1,
-  }));
+        const items = cart.map((item) => ({
+          productId: item.id,
+          size: item.size?.name ?? "",
+          additives: Array.isArray(item.additives)
+            ? item.additives.map((a) => a.name)
+            : [],
+          quantity: item.quantity ?? 1,
+        }));
 
-  const totalPrice = cart.reduce(
-    (acc, item) => acc + Number(item.totalPrice ?? 0),
-    0
-  );
+        const totalPrice = cart.reduce(
+          (acc, item) => acc + Number(item.totalPrice ?? 0),
+          0,
+        );
 
-  const body = {
-    items,
-    totalPrice: Number(totalPrice.toFixed(2)),
-  };
-         const loader = document.createElement("div");
-  loader.classList.add("loader-overlay");
-  loader.innerHTML = `
+        const body = {
+          items,
+          totalPrice: Number(totalPrice.toFixed(2)),
+        };
+        const loader = document.createElement("div");
+        loader.classList.add("loader-overlay");
+        loader.innerHTML = `
     <div class="loader"></div>
   `;
 
-  document.body.appendChild(loader);
+        document.body.appendChild(loader);
 
-  try {
-       await new Promise((resolve) => setTimeout(resolve, 3000));
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const response = await fetch(`${BASE_URL}/orders/confirm`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-      body: JSON.stringify(body),
-    });
+          const response = await fetch(`${BASE_URL}/orders/confirm`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify(body),
+          });
 
-    if (!response.ok) {
-      throw new Error("Order failed");
-    }
+          if (!response.ok) {
+            throw new Error("Order failed");
+          }
 
-    const data = await response.json();
-    console.log("Order placed:", data);
+          const data = await response.json();
+          console.log("Order placed:", data);
 
-    loader.remove();
+          loader.remove();
 
-    localStorage.removeItem("cart");
-    updateCartCount();
-    updateShoppingCartVisibility();
-    displayCarts();
+          localStorage.removeItem("cart");
+          updateCartCount();
+          updateShoppingCartVisibility();
+          displayCarts();
 
-    showNotification(
-      "Thank you for your order! Our manager will contact you shortly.",
-      "success"
-    );
-
-    
-  } catch (error) {
-     loader.remove();
-    showNotification("Something went wrong. Please, try again.", "error");
-  }
-        
-
-
+          showNotification(
+            "Thank you for your order! Our manager will contact you shortly.",
+            "success",
+          );
+        } catch (error) {
+          loader.remove();
+          showNotification("Something went wrong. Please, try again.", "error");
+        }
       });
     } else if (!isLoggedIn()) {
-      const cartRegBtn = create<HTMLDivElement>("div", ["registerbtn", "confirm-btn"], cartButtonsWrap);
+      const cartRegBtn = create<HTMLDivElement>(
+        "div",
+        ["registerbtn", "confirm-btn"],
+        cartButtonsWrap,
+      );
       cartRegBtn.innerText = "Register";
       cartRegBtn.addEventListener("click", () => {
         window.location.href = "/register.html";
       });
 
-      const cartSignBtn = create<HTMLDivElement>("div", ["signin", "confirm-btn"], cartButtonsWrap);
+      const cartSignBtn = create<HTMLDivElement>(
+        "div",
+        ["signin", "confirm-btn"],
+        cartButtonsWrap,
+      );
       cartSignBtn.innerText = "Sign In";
       cartSignBtn.addEventListener("click", () => {
         window.location.href = "/signin.html";
@@ -227,10 +328,11 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
     }
   }
 
-
   cartWrapper.addEventListener("click", (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    const deleteIcon = target.closest(".cart__items-deleteicon") as HTMLElement | null;
+    const deleteIcon = target.closest(
+      ".cart__items-deleteicon",
+    ) as HTMLElement | null;
     if (!deleteIcon) return;
 
     const itemId = deleteIcon.getAttribute("data-id");
@@ -246,25 +348,23 @@ const BASE_URL = "https://6kt29kkeub.execute-api.eu-central-1.amazonaws.com";
   });
 
   function showNotification(message: string, type: "success" | "error"): void {
-  const existing = document.querySelector(".notification");
-  if (existing) existing.remove();
+    const existing = document.querySelector(".notification");
+    if (existing) existing.remove();
 
-  const notification = document.createElement("div");
-  notification.classList.add("notification", type);
-  notification.innerText = message;
-  document.body.appendChild(notification);
+    const notification = document.createElement("div");
+    notification.classList.add("notification", type);
+    notification.innerText = message;
+    document.body.appendChild(notification);
 
-  setTimeout(() => {
-    notification.classList.add("show");
-  }, 50);
+    setTimeout(() => {
+      notification.classList.add("show");
+    }, 50);
 
-  setTimeout(() => {
-    notification.classList.remove("show");
-    setTimeout(() => notification.remove(), 300);
-  }, 4000);
-}
-
-
+    setTimeout(() => {
+      notification.classList.remove("show");
+      setTimeout(() => notification.remove(), 300);
+    }, 4000);
+  }
 
   updateShoppingCartVisibility();
   displayCarts();

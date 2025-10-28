@@ -25,7 +25,6 @@ interface HTMLElementMap {
   cartItems: HTMLElement;
 }
 
-
 const els: HTMLElementMap = {
   burgerButton: document.querySelector(".header__burger-button") as HTMLElement,
   lineButton: document.querySelector(".line") as HTMLElement,
@@ -41,7 +40,6 @@ const els: HTMLElementMap = {
   cartItems: document.querySelector(".cart-items") as HTMLElement,
 };
 
-
 const placeholders: string[] = [
   "/images/coffee-slider-1.png",
   "/images/coffee-slider-2.png",
@@ -51,11 +49,9 @@ const placeholders: string[] = [
 let timer: number | null = null;
 let slideIndex = 1;
 
-
 function isLoggedIn(): boolean {
   return !!localStorage.getItem("token");
 }
-
 
 els.burgerButton.addEventListener("click", (): void => {
   els.lineButton.classList.toggle("active-menu");
@@ -63,7 +59,8 @@ els.burgerButton.addEventListener("click", (): void => {
   els.body.classList.toggle("no-scroll");
 });
 
-const menuLinks: HTMLCollectionOf<Element> = document.getElementsByClassName("header__menu-item");
+const menuLinks: HTMLCollectionOf<Element> =
+  document.getElementsByClassName("header__menu-item");
 
 Array.from(menuLinks).forEach((link: Element): void => {
   link.addEventListener("click", (): void => {
@@ -72,7 +69,6 @@ Array.from(menuLinks).forEach((link: Element): void => {
     els.body.classList.remove("no-scroll");
   });
 });
-
 
 const isUserLogged: boolean = isLoggedIn();
 const storedCart: string | null = localStorage.getItem("cart");
@@ -85,8 +81,8 @@ if (Array.isArray(haveItems) && (isUserLogged || haveItems.length > 0)) {
   els.shoppingCart.classList.add("hidden");
 }
 
-
-const maxScrollLeft: number = els.imageList.scrollWidth - els.imageList.clientWidth;
+const maxScrollLeft: number =
+  els.imageList.scrollWidth - els.imageList.clientWidth;
 
 const updateScrollThumbPosition = (): void => {
   const scrollPosition: number = els.imageList.scrollLeft;
@@ -99,13 +95,12 @@ const updateScrollThumbPosition = (): void => {
 els.imageList.addEventListener("scroll", updateScrollThumbPosition);
 
 const showLoader = (): void => {
-  els.imageList.innerHTML = `<div class="loader">Loading...</div>`;
+  els.imageList.innerHTML = `<div class="loader"></div>`;
 };
 
 const showError = (): void => {
   els.imageList.innerHTML = `<p class="error">Something went wrong. Please refresh the page.</p>`;
 };
-
 
 interface IFetchResponse {
   data: ICoffee[];
@@ -136,7 +131,6 @@ async function fetchFavoriteCoffees(): Promise<ICoffee[] | undefined> {
   }
 }
 
-
 function renderSlides(coffees: ICoffee[]): void {
   els.imageList.innerHTML = "";
   els.dotsContainer.innerHTML = "";
@@ -165,16 +159,24 @@ function renderSlides(coffees: ICoffee[]): void {
 }
 
 function showSlides(n: number): void {
-  const slides: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("fade") as HTMLCollectionOf<HTMLElement>;
-  const dots: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("dot") as HTMLCollectionOf<HTMLElement>;
+  const slides: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName(
+    "fade",
+  ) as HTMLCollectionOf<HTMLElement>;
+  const dots: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName(
+    "dot",
+  ) as HTMLCollectionOf<HTMLElement>;
 
   if (slides.length === 0) return;
 
   if (n > slides.length) slideIndex = 1;
   if (n < 1) slideIndex = slides.length;
 
-  Array.from(slides).forEach((slide: HTMLElement) => (slide.style.display = "none"));
-  Array.from(dots).forEach((dot: HTMLElement): void => dot.classList.remove("active"));
+  Array.from(slides).forEach(
+    (slide: HTMLElement) => (slide.style.display = "none"),
+  );
+  Array.from(dots).forEach((dot: HTMLElement): void =>
+    dot.classList.remove("active"),
+  );
 
   slides[slideIndex - 1].style.display = "flex";
   if (dots.length > 0) dots[slideIndex - 1].classList.add("active");
@@ -206,7 +208,6 @@ function currentSlide(n: number): void {
   showSlides((slideIndex = n));
   resetAutoSlide();
 }
-
 
 els.prevBtn.addEventListener("click", (): void => plusSlides(-1));
 els.nextBtn.addEventListener("click", (): void => plusSlides(1));
