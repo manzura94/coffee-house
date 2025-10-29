@@ -41,9 +41,9 @@ const els: HTMLElementMap = {
 };
 
 const placeholders: string[] = [
-  "/images/coffee-slider-1.png",
-  "/images/coffee-slider-2.png",
-  "/images/coffee-slider-3.png",
+  "/images/coffee-1.jpg",
+  "/images/coffee-2.jpg",
+  "/images/coffee-3.jpg",
 ];
 
 let timer: number | null = null;
